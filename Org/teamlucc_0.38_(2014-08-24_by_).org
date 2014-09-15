@@ -1,3 +1,4 @@
+#+OPTIONS: ^:nil
 + Package: teamlucc
 + Version: 0.38
 + Date: 2014-08-24

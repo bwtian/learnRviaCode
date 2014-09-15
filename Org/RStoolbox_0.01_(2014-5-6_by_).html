@@ -1,0 +1,1100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>RStoolbox_0.01_(2014-5-6_by_)</title>
+<!-- 2014-09-15 Mon 16:35 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="tian" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">RStoolbox_0.01_(2014-5-6_by_)</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. cloudMask.R</a></li>
+<li><a href="#sec-2">2. estimateSHV.R</a></li>
+<li><a href="#sec-3">3. internalFunctions.R</a></li>
+<li><a href="#sec-4">4. radCor.R</a></li>
+<li><a href="#sec-5">5. readMeta.R</a></li>
+<li><a href="#sec-6">6. RStoolbox.R</a></li>
+<li><a href="#sec-7">7. spectralIndices.R</a></li>
+<li><a href="#sec-8">8. superClass.R</a></li>
+</ul>
+</div>
+</div>
+<ul class="org-ul">
+<li>Package: RStoolbox
+</li>
+<li>Type: Package
+</li>
+<li>Title: RStoolbox: A Collection of Remote Sensing Tools
+</li>
+<li>Version: 0.01
+</li>
+<li>Date: 2014-5-6
+</li>
+<li>Authors@R: c( person(&ldquo;Benjamin&rdquo;, &ldquo;Leutner&rdquo;, role = c(&ldquo;cre&rdquo;, &ldquo;aut&rdquo;), email =
+</li>
+<li>&ldquo;benjamin.leutner@uni-wuerzburg.de&rdquo;), person(&ldquo;Ned&rdquo;, &ldquo;Horning&rdquo;, role =
+</li>
+<li>c(&ldquo;aut&rdquo;), email = &ldquo;horning@amnh.org&rdquo;), person(&ldquo;Martin&rdquo;, &ldquo;Wegmann&rdquo;, role =
+</li>
+<li>c(&ldquo;aut&rdquo;), email = &ldquo;martin.wegmann@uni-wuerzburg.de&rdquo;))
+</li>
+<li>Description: RStoolbox provides remote sensing methods for image processing and
+</li>
+<li>classification such as spectral indices, supervised classification or
+</li>
+<li>fractional cover.
+</li>
+<li>Depends:
+</li>
+<li>R (&gt;= 3.1.0)
+</li>
+<li>Imports:
+</li>
+<li>stringr,
+</li>
+<li>raster,
+</li>
+<li>randomForest
+</li>
+<li>License: GPL (&gt;=3)
+</li>
+<li>LazyData: true
+</li>
+</ul>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> cloudMask.R</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+
+<pre class="src src-R"><span style="color: #ff6347;">cloudMask</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>x, threshold, minCloudSize, windowSize<span style="color: #daa520;">1</span> <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">5</span>, windowSize<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">11</span>, maskGrowing <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, sanitize <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, lowBand <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">1</span>, tirBand <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">6</span>, plot <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, verbose <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, returnDiffLayer <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">){</span>
+
+
+        op <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">par</span><span style="color: #20b2aa;">(</span>mfrow <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">2</span>, <span style="color: #daa520;">1</span> <span style="color: #ff00ff;">+</span> <span style="color: #ff6347;">sum</span><span style="color: #20b2aa;">(</span>sanitize, maskGrowing<span style="color: #20b2aa;">)))</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>CDIFF <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>verbose<span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Re<span style="color: #ff00ff;">-</span>using CDIFF layer from previous run.<span style="color: #20b2aa;">)</span>
+                cdiff <span style="color: #ff00ff;">&lt;-</span> x<span style="color: #20b2aa;">[[</span>CDIFF<span style="color: #20b2aa;">]]</span>
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                cdiff <span style="color: #ff00ff;">&lt;-</span> x<span style="color: #20b2aa;">[[</span>lowBand<span style="color: #20b2aa;">]]</span> <span style="color: #ff00ff;">-</span> x<span style="color: #20b2aa;">[[</span>tirBand<span style="color: #20b2aa;">]]</span>
+                <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>cdiff<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> CDIFF
+        <span style="color: #20b2aa;">}</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>threshold<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                threshold <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">quantile</span><span style="color: #20b2aa;">(</span>cdiff@data@max:cdiff@data@min, <span style="color: #daa520;">0</span>.<span style="color: #daa520;">45</span><span style="color: #20b2aa;">)</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>verbose<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span><span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>Estimated cloud threshold should be between , <span style="color: #ff6347;">round</span><span style="color: #20b2aa;">(</span>cdiff@data@min<span style="color: #20b2aa;">)</span>,  and , <span style="color: #ff6347;">round</span><span style="color: #20b2aa;">(</span>cdiff@data@max<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">)</span>
+                        <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>Guessed <span style="color: #ff6347;">threshold</span> <span style="color: #20b2aa;">(</span>rounded<span style="color: #20b2aa;">)</span>: , <span style="color: #ff6347;">round</span><span style="color: #20b2aa;">(</span>threshold<span style="color: #20b2aa;">)))</span>
+                <span style="color: #20b2aa;">}</span>
+        <span style="color: #20b2aa;">}</span>
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>threshold <span style="color: #ff00ff;">&lt;</span> cdiff@data@min | threshold <span style="color: #ff00ff;">&gt;</span> cdiff@data@max<span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">warning</span><span style="color: #20b2aa;">(</span>Threshold is not within the estimated data range, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>plot<span style="color: #20b2aa;">)</span> <span style="color: #ff6347;">plot</span><span style="color: #20b2aa;">(</span>cdiff, main <span style="color: #ff00ff;">=</span> Cloud layer: blue <span style="color: #ff00ff;">-</span> tir difference<span style="color: #20b2aa;">)</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>verbose<span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Begin thresholding<span style="color: #20b2aa;">)</span>
+        cmask <span style="color: #ff00ff;">&lt;-</span> cdiff <span style="color: #ff00ff;">&gt;</span> threshold
+        cmask <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">mask</span><span style="color: #20b2aa;">(</span>cmask, cmask, maskvalue <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">0</span><span style="color: #20b2aa;">)</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>plot<span style="color: #20b2aa;">)</span> <span style="color: #ff6347;">plot</span><span style="color: #20b2aa;">(</span>cmask, main <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>Cloud mask\nThreshold: , threshold<span style="color: #20b2aa;">))</span>
+
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>sanitize<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>verbose<span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Begin sanitzing<span style="color: #20b2aa;">)</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>minCloudSize<span style="color: #20b2aa;">))</span> minCloudSize <span style="color: #ff00ff;">&lt;-</span> windowSize<span style="color: #daa520;">1</span> ^ <span style="color: #daa520;">2</span>
+                w <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">matrix</span><span style="color: #20b2aa;">(</span>ncol <span style="color: #ff00ff;">=</span> windowSize<span style="color: #daa520;">1</span>, nrow <span style="color: #ff00ff;">=</span> windowSize<span style="color: #daa520;">1</span>, <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>minCloudSize <span style="color: #ff00ff;">&gt;=</span> windowSize^<span style="color: #daa520;">2</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                        cmod <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">focal</span><span style="color: #20b2aa;">(</span>cmask, w, na.rm <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+                <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                        cmod <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">focal</span><span style="color: #20b2aa;">(</span>cmask, w, na.rm <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span><span style="color: #20b2aa;">)</span>   
+                        cmod<span style="color: #20b2aa;">[</span>cmod <span style="color: #ff00ff;">&lt;</span> minCloudSize<span style="color: #20b2aa;">]</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">NA</span>         
+                <span style="color: #20b2aa;">}</span>
+                cmod<span style="color: #20b2aa;">[</span>cmod <span style="color: #ff00ff;">&lt;</span> minCloudSize<span style="color: #20b2aa;">]</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">NA</span>
+                cmod<span style="color: #20b2aa;">[</span>!<span style="color: #ff6347;">is.na</span><span style="color: #20b2aa;">(</span>cmod<span style="color: #20b2aa;">)]</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span>L
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>plot<span style="color: #20b2aa;">)</span> <span style="color: #ff6347;">plot</span><span style="color: #20b2aa;">(</span>cmod, main <span style="color: #ff00ff;">=</span> Sanitized cloud mask<span style="color: #20b2aa;">)</span>
+
+        <span style="color: #20b2aa;">}</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>maskGrowing<span style="color: #20b2aa;">){</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>verbose<span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Begin region<span style="color: #ff00ff;">-</span>growing<span style="color: #20b2aa;">)</span>
+                w <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">matrix</span><span style="color: #20b2aa;">(</span>ncol <span style="color: #ff00ff;">=</span> windowSize<span style="color: #daa520;">2</span>, nrow <span style="color: #ff00ff;">=</span> windowSize<span style="color: #daa520;">2</span>, <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>
+                cmod <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">focal</span><span style="color: #20b2aa;">(</span>cmod, w, na.rm <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span> <span style="color: #20b2aa;">)</span>
+                cmod<span style="color: #20b2aa;">[</span>!<span style="color: #ff6347;">is.na</span><span style="color: #20b2aa;">(</span>cmod<span style="color: #20b2aa;">)]</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span>L
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>plot<span style="color: #20b2aa;">)</span> <span style="color: #ff6347;">plot</span><span style="color: #20b2aa;">(</span>cmod, main <span style="color: #ff00ff;">=</span> Region<span style="color: #ff00ff;">-</span>grown cloud mask<span style="color: #20b2aa;">)</span>
+
+        <span style="color: #20b2aa;">}</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>plot<span style="color: #20b2aa;">){</span>
+                <span style="color: #ff6347;">plotRGB</span><span style="color: #20b2aa;">(</span>x, <span style="color: #daa520;">1</span>, <span style="color: #daa520;">2</span>, <span style="color: #daa520;">3</span>, title <span style="color: #ff00ff;">=</span> Final mask, stretch <span style="color: #ff00ff;">=</span> lin<span style="color: #20b2aa;">)</span>
+                <span style="color: #ff6347;">plot</span><span style="color: #20b2aa;">(</span>cmod,  legend <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span>, add <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">T</span>, col <span style="color: #ff00ff;">=</span> yellow<span style="color: #20b2aa;">)</span>
+        <span style="color: #20b2aa;">}</span>
+
+
+        <span style="color: #ff6347;">par</span><span style="color: #20b2aa;">(</span>op<span style="color: #20b2aa;">)</span>
+
+
+        <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>cmod<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> CMASK
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>returnDiffLayer<span style="color: #20b2aa;">)</span> cmod <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">stack</span><span style="color: #20b2aa;">(</span>cmod, cdiff<span style="color: #20b2aa;">)</span>
+        <span style="color: #00ffff;">return</span><span style="color: #20b2aa;">(</span>cmod<span style="color: #20b2aa;">)</span>    
+<span style="color: #20b2aa;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> estimateSHV.R</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-R"><span style="color: #ff6347;">estimateSHV</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>x, hazeBand, darkProp <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">0</span>.<span style="color: #daa520;">02</span>, plot <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span>, returnTables <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">inherits</span><span style="color: #20b2aa;">(</span>x, Raster<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                preCalc <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">FALSE</span>
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.list</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span> &amp; table <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                        preCalc <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">TRUE</span> 
+                <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                        <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>x must be a Raster* object or the result of a previous run of <span style="color: #ff6347;">estimateSHV</span><span style="color: #20b2aa;">(</span>Raster*, <span style="color: #20b2aa;">)</span> with argument <span style="color: #00ff00;">'returnTables = TRUE'</span>, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+                <span style="color: #20b2aa;">}</span>       
+        <span style="color: #20b2aa;">}</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!preCalc<span style="color: #20b2aa;">){</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>hazeBand<span style="color: #20b2aa;">)){</span> 
+                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">nlayers</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">==</span> <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                                hazeBand <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span>        
+                        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                                <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>Please specify the band from which you want to estimate the haze dn<span style="color: #20b2aa;">)</span>
+                        <span style="color: #20b2aa;">}</span>       
+                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.numeric</span><span style="color: #20b2aa;">(</span>hazeBand<span style="color: #20b2aa;">))</span> hazeBand <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)[</span>hazeBand<span style="color: #20b2aa;">]</span>
+                <span style="color: #20b2aa;">}</span>
+
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.numeric</span><span style="color: #20b2aa;">(</span>hazeBand<span style="color: #20b2aa;">))</span> hazeBand <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x$table<span style="color: #20b2aa;">)[</span>hazeBand<span style="color: #20b2aa;">]</span>
+                preCalcAvail <span style="color: #ff00ff;">&lt;-</span> hazeBand <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x$table<span style="color: #20b2aa;">)</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!<span style="color: #ff6347;">any</span><span style="color: #20b2aa;">(</span>preCalcAvail<span style="color: #20b2aa;">))</span>  <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>Cannot estimate SHV because tables are missing <span style="color: #00ffff;">for</span> all specified bands, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">any</span><span style="color: #20b2aa;">(</span>!preCalcAvail<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                        <span style="color: #00ffff;">warning</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>Cannot estimate SHV <span style="color: #00ffff;">for</span> <span style="color: #ff00ff;">&gt;&gt;</span> , hazeBand<span style="color: #20b2aa;">[</span>!preCalcAvail<span style="color: #20b2aa;">]</span>,  <span style="color: #ff00ff;">&lt;&lt;</span> because tables are missing.<span style="color: #20b2aa;">)</span>, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+                        hazeBand <span style="color: #ff00ff;">&lt;-</span> hazeBand<span style="color: #20b2aa;">[</span>preCalcAvail<span style="color: #20b2aa;">]</span>                              
+                <span style="color: #20b2aa;">}</span>       
+        <span style="color: #20b2aa;">}</span>
+
+
+        multiple <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">length</span><span style="color: #20b2aa;">(</span>hazeBand<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&gt;</span> <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span> <span style="color: #daa520;">TRUE</span> <span style="color: #00ffff;">else</span> <span style="color: #daa520;">FALSE</span>
+
+
+        out   <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">lapply</span><span style="color: #20b2aa;">(</span>hazeBand, <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>bi<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">inherits</span><span style="color: #20b2aa;">(</span>x, Raster<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                                        tf <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">freq</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">[[</span>bi<span style="color: #20b2aa;">]]</span>, useNA <span style="color: #ff00ff;">=</span> no<span style="color: #20b2aa;">)</span> 
+                                <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.list</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span> &amp; table <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                                                preCalc <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">TRUE</span>
+                                                tf <span style="color: #ff00ff;">&lt;-</span> x$table<span style="color: #20b2aa;">[[</span>bi<span style="color: #20b2aa;">]]</span>
+                                        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                                                <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>x must be a Raster* object or the result of a previous run of <span style="color: #ff6347;">estimateSHV</span><span style="color: #20b2aa;">()</span> with argument <span style="color: #00ff00;">'returnTables = TRUE'</span>, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+                                        <span style="color: #20b2aa;">}</span>
+                                <span style="color: #20b2aa;">}</span>
+                                tf <span style="color: #ff00ff;">&lt;-</span> tf<span style="color: #20b2aa;">[</span>tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">]</span> <span style="color: #ff00ff;">&gt;</span> <span style="color: #daa520;">0</span>,<span style="color: #20b2aa;">]</span>
+                                tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">2</span><span style="color: #20b2aa;">]</span> <span style="color: #ff00ff;">&lt;-</span> tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">2</span><span style="color: #20b2aa;">]</span><span style="color: #ff00ff;">/</span><span style="color: #ff6347;">sum</span><span style="color: #20b2aa;">(</span>tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">2</span><span style="color: #20b2aa;">])</span>
+                                dtf <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">diff</span><span style="color: #20b2aa;">(</span>tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">2</span><span style="color: #20b2aa;">])</span>,<span style="color: #daa520;">0</span><span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">/</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">diff</span><span style="color: #20b2aa;">(</span>tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">])</span>,<span style="color: #daa520;">0</span><span style="color: #20b2aa;">)</span>
+
+                                SHV <span style="color: #ff00ff;">&lt;-</span> tf<span style="color: #20b2aa;">[</span><span style="color: #ff6347;">which</span><span style="color: #20b2aa;">(</span>dtf <span style="color: #ff00ff;">&gt;</span> darkProp<span style="color: #20b2aa;">)[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]</span>, <span style="color: #daa520;">1</span><span style="color: #20b2aa;">]</span> 
+                                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.na</span><span style="color: #20b2aa;">(</span>SHV<span style="color: #20b2aa;">))</span> <span style="color: #00ffff;">warning</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #20b2aa;">(</span>darkProp <span style="color: #00ffff;">for</span> band, bi, was chosen too high. It exceeds the value range.<span style="color: #20b2aa;">)</span>, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+
+                                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>plot<span style="color: #20b2aa;">){</span>
+                                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>multiple<span style="color: #20b2aa;">)</span> <span style="color: #ff6347;">x</span><span style="color: #daa520;">11</span><span style="color: #20b2aa;">()</span>
+                                        <span style="color: #ff6347;">par</span><span style="color: #20b2aa;">(</span>mfrow <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">1</span>,<span style="color: #daa520;">2</span><span style="color: #20b2aa;">))</span>
+
+                                        <span style="color: #ff6347;">plot</span><span style="color: #20b2aa;">(</span>tf, xlab <span style="color: #ff00ff;">=</span> DN, ylab <span style="color: #ff00ff;">=</span> Frequency, type <span style="color: #ff00ff;">=</span> l, main <span style="color: #ff00ff;">=</span> bi<span style="color: #20b2aa;">)</span>
+                                        <span style="color: #ff6347;">abline</span><span style="color: #20b2aa;">(</span>v <span style="color: #ff00ff;">=</span> tf<span style="color: #20b2aa;">[</span>tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">]</span><span style="color: #ff00ff;">==</span>SHV,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">]</span>, col<span style="color: #ff00ff;">=</span>red<span style="color: #20b2aa;">)</span>
+                                        <span style="color: #ff6347;">text</span><span style="color: #20b2aa;">(</span>SHV, <span style="color: #ff6347;">max</span><span style="color: #20b2aa;">(</span>tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">2</span><span style="color: #20b2aa;">])</span>, pos<span style="color: #ff00ff;">=</span><span style="color: #daa520;">4</span>, label <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>SHV_DN <span style="color: #ff00ff;">=</span> , SHV<span style="color: #20b2aa;">)</span>, col <span style="color: #ff00ff;">=</span>red<span style="color: #20b2aa;">)</span>
+
+                                        <span style="color: #ff6347;">plot</span><span style="color: #20b2aa;">(</span>dtf, type<span style="color: #ff00ff;">=</span>l, xlab <span style="color: #ff00ff;">=</span> DN, ylab <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">diff</span><span style="color: #20b2aa;">(</span>Frequency<span style="color: #20b2aa;">)</span>, main <span style="color: #ff00ff;">=</span> bi<span style="color: #20b2aa;">)</span>
+                                        <span style="color: #ff6347;">abline</span><span style="color: #20b2aa;">(</span>v <span style="color: #ff00ff;">=</span> tf<span style="color: #20b2aa;">[</span>tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">]</span><span style="color: #ff00ff;">==</span>SHV,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">]</span>, col<span style="color: #ff00ff;">=</span>red<span style="color: #20b2aa;">)</span>
+                                        <span style="color: #ff6347;">abline</span><span style="color: #20b2aa;">(</span>h <span style="color: #ff00ff;">=</span> darkProp, col <span style="color: #ff00ff;">=</span> <span style="color: #cccccc;">#</span><span style="color: #daa520;">00000070</span><span style="color: #cccccc;">, lty = </span><span style="color: #daa520;">2</span><span style="color: #cccccc;">)</span>
+                                        <span style="color: #ff6347;">text</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">max</span><span style="color: #20b2aa;">(</span>tf<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">])</span>, darkProp, label <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>darkProp <span style="color: #ff00ff;">=</span> , darkProp<span style="color: #20b2aa;">)</span>, col <span style="color: #ff00ff;">=</span> <span style="color: #cccccc;">#</span><span style="color: #daa520;">00000070</span><span style="color: #cccccc;">)</span>
+                                        <span style="color: #ff6347;">text</span><span style="color: #20b2aa;">(</span>SHV, <span style="color: #ff6347;">max</span><span style="color: #20b2aa;">(</span>dtf, na.rm <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span><span style="color: #20b2aa;">)</span>, pos<span style="color: #ff00ff;">=</span><span style="color: #daa520;">4</span>, label <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>SHV_DN <span style="color: #ff00ff;">=</span> , SHV<span style="color: #20b2aa;">)</span>, col <span style="color: #ff00ff;">=</span>red<span style="color: #20b2aa;">)</span>
+
+                                <span style="color: #20b2aa;">}</span>
+
+                                <span style="color: #00ffff;">return</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>table <span style="color: #ff00ff;">=</span> tf, SHV <span style="color: #ff00ff;">=</span> SHV<span style="color: #20b2aa;">))</span>
+                        <span style="color: #20b2aa;">})</span>
+
+        SHV <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">unlist</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">sapply</span><span style="color: #20b2aa;">(</span>out, <span style="color: #20b2aa;">[</span>, <span style="color: #daa520;">2</span><span style="color: #20b2aa;">))</span>
+        <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>SHV<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> hazeBand
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!preCalc<span style="color: #20b2aa;">){</span>
+                table <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">sapply</span><span style="color: #20b2aa;">(</span>out, <span style="color: #20b2aa;">[</span>, <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>
+                <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>table<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> hazeBand
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                table <span style="color: #ff00ff;">&lt;-</span> x$table
+        <span style="color: #20b2aa;">}</span>
+        <span style="color: #00ffff;">return</span><span style="color: #20b2aa;">(</span> <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!returnTables<span style="color: #20b2aa;">)</span> SHV <span style="color: #00ffff;">else</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>SHV<span style="color: #ff00ff;">=</span>SHV, table <span style="color: #ff00ff;">=</span> table<span style="color: #20b2aa;">))</span>
+<span style="color: #20b2aa;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> internalFunctions.R</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-R"><span style="color: #ff6347;">.ESdist</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>adate<span style="color: #20b2aa;">){</span>     
+        edist <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">julian</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">as.Date</span><span style="color: #20b2aa;">(</span>adate<span style="color: #20b2aa;">)</span>, origin<span style="color: #ff00ff;">=</span><span style="color: #ff6347;">as.Date</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">substring</span><span style="color: #20b2aa;">(</span>adate, <span style="color: #daa520;">1</span>, <span style="color: #daa520;">4</span><span style="color: #20b2aa;">)</span>, <span style="color: #daa520;">12</span>, <span style="color: #daa520;">31</span>, sep<span style="color: #ff00ff;">=-</span><span style="color: #20b2aa;">)))[[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]]</span>
+         <span style="color: #daa520;">1</span> <span style="color: #ff00ff;">-</span> <span style="color: #daa520;">0</span>.<span style="color: #daa520;">016729</span> * <span style="color: #ff6347;">cos</span><span style="color: #20b2aa;">((</span><span style="color: #daa520;">2</span>*pi<span style="color: #20b2aa;">)</span> * <span style="color: #20b2aa;">(</span><span style="color: #daa520;">0</span>.<span style="color: #daa520;">9856</span> * <span style="color: #20b2aa;">(</span>edist <span style="color: #ff00ff;">-</span> <span style="color: #daa520;">4</span><span style="color: #20b2aa;">)</span><span style="color: #ff00ff;">/</span><span style="color: #daa520;">360</span><span style="color: #20b2aa;">))</span>
+<span style="color: #20b2aa;">}</span>
+<span style="color: #ff6347;">.getNumeric</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>x, returnNumeric <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+        <span style="color: #ff6347;">sapply</span><span style="color: #20b2aa;">(</span>x, <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>xi<span style="color: #20b2aa;">){</span>
+                                d <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">strsplit</span><span style="color: #20b2aa;">(</span>xi, <span style="color: #20b2aa;">[</span>^<span style="color: #20b2aa;">[</span>:digit:<span style="color: #20b2aa;">]])[[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]]</span>
+                                d <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>returnNumeric<span style="color: #20b2aa;">)</span> <span style="color: #ff6347;">as.numeric</span><span style="color: #20b2aa;">(</span>d<span style="color: #20b2aa;">[</span>d!<span style="color: #ff00ff;">=</span><span style="color: #20b2aa;">])</span> <span style="color: #00ffff;">else</span> d<span style="color: #20b2aa;">[</span>d!<span style="color: #ff00ff;">=</span><span style="color: #20b2aa;">]</span>
+                                d
+                        <span style="color: #20b2aa;">})</span>
+<span style="color: #20b2aa;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> radCor.R</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-R">        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!reflectance &amp; method !<span style="color: #ff00ff;">=</span> APREF<span style="color: #20b2aa;">){</span>
+<span style="color: #ff6347;">radCor</span> <span style="color: #ff00ff;">&lt;-</span>       <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>x, metaData, reflectance <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, thermal <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, satellite, bandSet <span style="color: #ff00ff;">=</span> full, gain, offset, G_rescale, B_rescale,
+                sunElev, satZenith <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">0</span>, d, esun, date, SHV, hazeBand, atHaze,  method <span style="color: #ff00ff;">=</span> APREF<span style="color: #20b2aa;">){</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!method <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>APREF, DOS, COSTZ, SDOS<span style="color: #20b2aa;">))</span> <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>method must be one of <span style="color: #00ff00;">'APREF'</span>, <span style="color: #00ff00;">'DOS'</span>, <span style="color: #00ff00;">'COSTZ'</span> <span style="color: #00ff00;">'SDOS'</span>, call.<span style="color: #ff00ff;">=</span><span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!reflectance &amp; method !<span style="color: #ff00ff;">=</span> APREF<span style="color: #20b2aa;">){</span>
+                <span style="color: #00ffff;">warning</span><span style="color: #20b2aa;">(</span>For radiance calculations the <span style="color: #00ff00;">'method'</span> argument is ignored<span style="color: #20b2aa;">)</span>
+                method <span style="color: #ff00ff;">&lt;-</span> APREF
+        <span style="color: #20b2aa;">}</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!<span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>metaData<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.character</span><span style="color: #20b2aa;">(</span>metaData<span style="color: #20b2aa;">))</span> metaData <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">readMeta</span><span style="color: #20b2aa;">(</span>metaData<span style="color: #20b2aa;">)</span>
+
+                satellite       <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$SPACECRAFT_ID
+                sensor          <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$SENSOR_ID
+                B_rescale       <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$RAD_OFFSET
+                G_rescale       <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$RAD_GAIN
+                d                       <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$EARTH_SUN_DISTANCE
+                sunElev         <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$SUN_ELEVATION
+                rad             <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$RADIOMETRIC_RES
+                K<span style="color: #daa520;">1</span>                      <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$K<span style="color: #daa520;">1</span>
+                K<span style="color: #daa520;">2</span>                      <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$K<span style="color: #daa520;">2</span>
+
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+
+                sensor <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">1</span>
+                rad <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">8</span>
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>G_rescale<span style="color: #20b2aa;">)</span> | <span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>B_rescale<span style="color: #20b2aa;">)){</span>
+                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>offset<span style="color: #20b2aa;">)</span> | <span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>gain<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                                <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>Please specify either a<span style="color: #20b2aa;">)</span> metaData, b<span style="color: #20b2aa;">)</span> gain and offset, c<span style="color: #20b2aa;">)</span> B_rescale and G_rescale, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span> <span style="color: #20b2aa;">)</span>
+                        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                                B_rescale <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span><span style="color: #ff00ff;">/</span>gain
+                                G_rescale <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff00ff;">-</span>offset<span style="color: #ff00ff;">/</span>gain
+                        <span style="color: #20b2aa;">}</span>
+                <span style="color: #20b2aa;">}</span>
+
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>d<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>date<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span> 
+                                <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>Please specify either a<span style="color: #20b2aa;">)</span> edist or b<span style="color: #20b2aa;">)</span>date, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span> 
+                        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                                d <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">.ESdist</span><span style="color: #20b2aa;">(</span>date<span style="color: #20b2aa;">)</span> 
+                        <span style="color: #20b2aa;">}</span>
+                <span style="color: #20b2aa;">}</span>
+        <span style="color: #20b2aa;">}</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>satellite <span style="color: #ff00ff;">==</span> LANDSAT<span style="color: #daa520;">8</span> &amp; method !<span style="color: #ff00ff;">=</span> APREF<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                <span style="color: #00ffff;">warning</span><span style="color: #20b2aa;">(</span>DOS, COSTZ and SDOS are currently not implemented <span style="color: #00ffff;">for</span> Landsat <span style="color: #daa520;">8</span>. Using official reflectance calibration coefficients, i.e. output corresponds to method <span style="color: #ff00ff;">=</span> <span style="color: #00ff00;">'APREF'</span>, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span> 
+                method <span style="color: #ff00ff;">&lt;-</span> APREF
+        <span style="color: #20b2aa;">}</span>
+
+        satZenith       <span style="color: #ff00ff;">&lt;-</span> satZenith * pi <span style="color: #ff00ff;">/</span> <span style="color: #daa520;">180</span>
+        satphi          <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">cos</span><span style="color: #20b2aa;">(</span>satZenith<span style="color: #20b2aa;">)</span>
+        suntheta        <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">cos</span><span style="color: #20b2aa;">((</span><span style="color: #daa520;">90</span> <span style="color: #ff00ff;">-</span> sunElev<span style="color: #20b2aa;">)</span> * pi <span style="color: #ff00ff;">/</span> <span style="color: #daa520;">180</span><span style="color: #20b2aa;">)</span>       
+
+
+        sDB <span style="color: #ff00ff;">&lt;-</span> LANDSAT.db<span style="color: #20b2aa;">[[</span>satellite<span style="color: #20b2aa;">]][[</span>sensor<span style="color: #20b2aa;">]]</span>
+
+
+
+        sDB     <span style="color: #ff00ff;">&lt;-</span> sDB<span style="color: #20b2aa;">[</span><span style="color: #ff6347;">match</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>B, <span style="color: #ff6347;">sapply</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">.getNumeric</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">))</span>,<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">))</span>, sDB$band<span style="color: #20b2aa;">)</span>,<span style="color: #20b2aa;">]</span>  
+        sDB             <span style="color: #ff00ff;">&lt;-</span> sDB<span style="color: #20b2aa;">[</span><span style="color: #ff6347;">match</span><span style="color: #20b2aa;">(</span>sDB$band, <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>B,<span style="color: #ff6347;">sapply</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">.getNumeric</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">))</span>,<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">)))</span>,<span style="color: #20b2aa;">]</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">any</span><span style="color: #20b2aa;">(</span>bandSet <span style="color: #ff00ff;">==</span> full<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                bandSet <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span>
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.numeric</span><span style="color: #20b2aa;">(</span>bandSet<span style="color: #20b2aa;">))</span> bandSet <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>B, bandSet<span style="color: #20b2aa;">)</span>
+        <span style="color: #20b2aa;">}</span>       
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>metaData<span style="color: #20b2aa;">))</span>   <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>B_rescale<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>G_rescale<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> bandSet
+
+        origBands       <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span>   
+        corBands        <span style="color: #ff00ff;">&lt;-</span> sDB<span style="color: #20b2aa;">[</span>!sDB$bandtype <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>TIR, PAN<span style="color: #20b2aa;">)</span>, band<span style="color: #20b2aa;">]</span>
+        bandSet         <span style="color: #ff00ff;">&lt;-</span> bandSet<span style="color: #20b2aa;">[</span>bandSet <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> corBands<span style="color: #20b2aa;">]</span>
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>thermal<span style="color: #20b2aa;">){</span>
+                tirBands        <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>satellite<span style="color: #ff00ff;">==</span>LANDSAT<span style="color: #daa520;">8</span><span style="color: #20b2aa;">)</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>B<span style="color: #daa520;">10</span>, B<span style="color: #daa520;">11</span><span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">else</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>B<span style="color: #daa520;">6</span>, B<span style="color: #daa520;">6</span>_VCID_<span style="color: #daa520;">1</span>, B<span style="color: #daa520;">6</span>_VCID_<span style="color: #daa520;">2</span><span style="color: #20b2aa;">)</span> 
+                tirBands        <span style="color: #ff00ff;">&lt;-</span> origBands<span style="color: #20b2aa;">[</span>origBands <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> tirBands<span style="color: #20b2aa;">]</span>
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                tirBands <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">NULL</span>
+        <span style="color: #20b2aa;">}</span>
+        exclBands       <span style="color: #ff00ff;">&lt;-</span> origBands<span style="color: #20b2aa;">[</span>!origBands <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>bandSet, tirBands<span style="color: #20b2aa;">)]</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">length</span><span style="color: #20b2aa;">(</span>exclBands<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&gt;</span> <span style="color: #daa520;">0</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                xexc <span style="color: #ff00ff;">&lt;-</span> x<span style="color: #20b2aa;">[[</span>exclBands<span style="color: #20b2aa;">]]</span> 
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                xexc <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">NULL</span>
+        <span style="color: #20b2aa;">}</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>esun<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                esun <span style="color: #ff00ff;">&lt;-</span> sDB<span style="color: #20b2aa;">[</span>,esun<span style="color: #20b2aa;">]</span> 
+                <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>esun<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> sDB$band
+        <span style="color: #20b2aa;">}</span>
+        xref <span style="color: #ff00ff;">&lt;-</span> x<span style="color: #20b2aa;">[[</span>bandSet<span style="color: #20b2aa;">]]</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>reflectance<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Bands to convert to reflectance: , <span style="color: #ff6347;">paste</span><span style="color: #20b2aa;">(</span>bandSet, collapse <span style="color: #ff00ff;">=</span> , <span style="color: #20b2aa;">))</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">length</span><span style="color: #20b2aa;">(</span>tirBands<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&gt;</span> <span style="color: #daa520;">0</span> &amp; thermal<span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Thermal bands to convert to brightness temperatures: , <span style="color: #ff6347;">paste</span><span style="color: #20b2aa;">(</span>tirBands, collapse<span style="color: #ff00ff;">=</span>, <span style="color: #20b2aa;">))</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">length</span><span style="color: #20b2aa;">(</span>exclBands<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&gt;</span> <span style="color: #daa520;">0</span><span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Excluding bands: , <span style="color: #ff6347;">paste</span><span style="color: #20b2aa;">(</span>exclBands, collapse <span style="color: #ff00ff;">=</span> , <span style="color: #20b2aa;">))</span>   
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                bandSet <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>bandSet, tirBands<span style="color: #20b2aa;">)</span>
+                <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Bands to convert to toa radiance: , <span style="color: #ff6347;">paste</span><span style="color: #20b2aa;">(</span>bandSet, collapse <span style="color: #ff00ff;">=</span> , <span style="color: #20b2aa;">))</span>
+        <span style="color: #20b2aa;">}</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>thermal &amp; reflectance &amp; <span style="color: #ff6347;">length</span><span style="color: #20b2aa;">(</span>tirBands<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&gt;</span> <span style="color: #daa520;">0</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Processing thermal <span style="color: #ff6347;">band</span><span style="color: #20b2aa;">(</span>s<span style="color: #20b2aa;">))</span>
+
+                L <span style="color: #ff00ff;">&lt;-</span> G_rescale<span style="color: #20b2aa;">[</span>tirBands<span style="color: #20b2aa;">]</span> * x<span style="color: #20b2aa;">[[</span>tirBands<span style="color: #20b2aa;">]]</span> <span style="color: #ff00ff;">+</span> B_rescale<span style="color: #20b2aa;">[</span>tirBands<span style="color: #20b2aa;">]</span>
+
+                xtir <span style="color: #ff00ff;">&lt;-</span> K<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">/</span> <span style="color: #ff6347;">log</span><span style="color: #20b2aa;">(</span>K<span style="color: #daa520;">1</span><span style="color: #ff00ff;">/</span>L <span style="color: #ff00ff;">+</span> <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span> 
+                <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>xtir<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> tirBands
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                xtir <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">NULL</span>
+        <span style="color: #20b2aa;">}</span>
+
+        <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Processing radiance <span style="color: #ff00ff;">/</span> reflectance<span style="color: #20b2aa;">)</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>method <span style="color: #ff00ff;">==</span> APREF<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                TAUz <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span>
+                TAUv <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span>
+                Edown <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">0</span>
+                Lhaze <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">0</span>
+
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>SHV<span style="color: #20b2aa;">)){</span>
+                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>hazeBand<span style="color: #20b2aa;">))</span>  hazeBand <span style="color: #ff00ff;">&lt;-</span> B<span style="color: #daa520;">1</span>
+                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">length</span><span style="color: #20b2aa;">(</span>hazeBand<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&gt;</span> <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                                <span style="color: #00ffff;">warning</span><span style="color: #20b2aa;">(</span>Automatic search <span style="color: #00ffff;">for</span> SHV values is intended <span style="color: #00ffff;">for</span> one band only. For more bands please estimate hzae DNs manually using <span style="color: #ff6347;">estimateSHV</span><span style="color: #20b2aa;">()</span> \nhazeBand was automatically reset to <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>
+                                hazeBand <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span> <span style="color: #20b2aa;">}</span>
+                        <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>SHV was not provided <span style="color: #ff00ff;">-&gt;</span> Estimating SHV automatically<span style="color: #20b2aa;">)</span>
+                        dP <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">0</span>.<span style="color: #daa520;">02</span>
+
+                        SHV <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">suppressWarnings</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">estimateSHV</span><span style="color: #20b2aa;">(</span>x, hazeBand <span style="color: #ff00ff;">=</span> hazeBand, darkProp <span style="color: #ff00ff;">=</span> dP , plot <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span>, returnTables <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span><span style="color: #20b2aa;">))</span>
+                        <span style="color: #00ffff;">while</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.na</span><span style="color: #20b2aa;">(</span>SHV<span style="color: #20b2aa;">[[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]])){</span>
+                                dP      <span style="color: #ff00ff;">&lt;-</span> dP * <span style="color: #daa520;">0</span>.<span style="color: #daa520;">9</span>
+                                SHV <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">suppressWarnings</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">estimateSHV</span><span style="color: #20b2aa;">(</span>SHV, hazeBand <span style="color: #ff00ff;">=</span> hazeBand, darkProp <span style="color: #ff00ff;">=</span> dP, plot <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span>, returnTables <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span><span style="color: #20b2aa;">))</span>
+                        <span style="color: #20b2aa;">}</span>
+                        <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>SHV estimated as: , SHV<span style="color: #20b2aa;">[[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]]))</span>
+                        SHV <span style="color: #ff00ff;">&lt;-</span> SHV<span style="color: #20b2aa;">[[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]]</span>
+                <span style="color: #20b2aa;">}</span>
+
+
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>method <span style="color: #ff00ff;">==</span> SDOS<span style="color: #20b2aa;">)</span> hazeBand <span style="color: #ff00ff;">&lt;-</span> bandSet 
+                TAUz <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span>
+                TAUv <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span>
+                Edown <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">0</span>                              
+                <span style="color: #00ffff;">if</span> <span style="color: #20b2aa;">(</span>method <span style="color: #ff00ff;">==</span> COSTZ<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                        TAUz <span style="color: #ff00ff;">&lt;-</span> suntheta
+                        TAUv <span style="color: #ff00ff;">&lt;-</span> satphi
+                <span style="color: #20b2aa;">}</span>  
+
+
+                Ldo <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">0</span>.<span style="color: #daa520;">01</span> * <span style="color: #20b2aa;">((</span>esun<span style="color: #20b2aa;">[</span>hazeBand<span style="color: #20b2aa;">]</span> * suntheta * TAUz<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">+</span> Edown<span style="color: #20b2aa;">)</span> * TAUv <span style="color: #ff00ff;">/</span> <span style="color: #20b2aa;">(</span>pi * d ^ <span style="color: #daa520;">2</span><span style="color: #20b2aa;">)</span>
+                Lhaze <span style="color: #ff00ff;">&lt;-</span> <span style="color: #20b2aa;">(</span>SHV * G_rescale<span style="color: #20b2aa;">[</span>hazeBand<span style="color: #20b2aa;">]</span> <span style="color: #ff00ff;">+</span> B_rescale<span style="color: #20b2aa;">[</span>hazeBand<span style="color: #20b2aa;">])</span> <span style="color: #ff00ff;">-</span> Ldo
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>method <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>DOS, COSTZ<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>         
+
+                        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>atHaze<span style="color: #20b2aa;">))</span> <span style="color: #20b2aa;">{</span>
+                                atHaze.db <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">data.frame</span><span style="color: #20b2aa;">(</span>min <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">1</span>,<span style="color: #daa520;">56</span>,<span style="color: #daa520;">76</span>,<span style="color: #daa520;">96</span>,<span style="color: #daa520;">116</span><span style="color: #20b2aa;">)</span>, max <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">55</span>,<span style="color: #daa520;">75</span>,<span style="color: #daa520;">95</span>,<span style="color: #daa520;">115</span>,<span style="color: #daa520;">255</span><span style="color: #20b2aa;">))</span> <span style="color: #ff00ff;">/</span> <span style="color: #daa520;">255</span> * <span style="color: #20b2aa;">(</span><span style="color: #daa520;">2</span>^rad<span style="color: #ff00ff;">-</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>
+                                atHaze <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>veryClear, clear, moderate, hazy, veryHazy<span style="color: #20b2aa;">)[</span>Lhaze <span style="color: #ff00ff;">&gt;</span> atHaze.db<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">1</span><span style="color: #20b2aa;">]</span> &amp; Lhaze <span style="color: #ff00ff;">&lt;=</span> atHaze.db<span style="color: #20b2aa;">[</span>,<span style="color: #daa520;">2</span><span style="color: #20b2aa;">]]</span>
+                                <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>Selcting atmosphere: <span style="color: #00ff00;">', atHaze, '</span><span style="color: #20b2aa;">)</span>
+                        <span style="color: #20b2aa;">}</span>               
+                        Lhaze     <span style="color: #ff00ff;">&lt;-</span> Lhaze  * sDB<span style="color: #20b2aa;">[</span><span style="color: #ff6347;">match</span><span style="color: #20b2aa;">(</span>bandSet,sDB$band<span style="color: #20b2aa;">)</span>, <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>hazeBand,_, atHaze<span style="color: #20b2aa;">)]</span>
+
+
+                        NORM  <span style="color: #ff00ff;">&lt;-</span> G_rescale<span style="color: #20b2aa;">[</span>bandSet<span style="color: #20b2aa;">]</span> <span style="color: #ff00ff;">/</span> G_rescale<span style="color: #20b2aa;">[</span>hazeBand<span style="color: #20b2aa;">]</span>
+                        Lhaze <span style="color: #ff00ff;">&lt;-</span> Lhaze * NORM <span style="color: #ff00ff;">+</span> B_rescale<span style="color: #20b2aa;">[</span>bandSet<span style="color: #20b2aa;">]</span>      
+                <span style="color: #20b2aa;">}</span>
+
+                Lhaze <span style="color: #20b2aa;">[</span>Lhaze <span style="color: #ff00ff;">&lt;</span> <span style="color: #daa520;">0</span><span style="color: #20b2aa;">]</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">0</span>
+        <span style="color: #20b2aa;">}</span>
+
+        B_rescale       <span style="color: #ff00ff;">&lt;-</span> B_rescale<span style="color: #20b2aa;">[</span>bandSet<span style="color: #20b2aa;">]</span>
+        G_rescale       <span style="color: #ff00ff;">&lt;-</span> G_rescale<span style="color: #20b2aa;">[</span>bandSet<span style="color: #20b2aa;">]</span>
+        esun <span style="color: #ff00ff;">&lt;-</span> esun<span style="color: #20b2aa;">[</span>bandSet<span style="color: #20b2aa;">]</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>satellite !<span style="color: #ff00ff;">=</span> LANDSAT<span style="color: #daa520;">8</span><span style="color: #20b2aa;">){</span>
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!reflectance<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+
+                        xref <span style="color: #ff00ff;">&lt;-</span>  <span style="color: #20b2aa;">(</span> xref * G_rescale <span style="color: #ff00ff;">+</span> B_rescale<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">/</span> suntheta
+                <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+
+                        C <span style="color: #ff00ff;">&lt;-</span> <span style="color: #20b2aa;">(</span>pi * d ^ <span style="color: #daa520;">2</span><span style="color: #20b2aa;">)</span><span style="color: #ff00ff;">/</span><span style="color: #20b2aa;">(</span>TAUv * <span style="color: #20b2aa;">(</span>esun * suntheta * TAUz <span style="color: #ff00ff;">+</span> Edown<span style="color: #20b2aa;">))</span>     
+                        b <span style="color: #ff00ff;">&lt;-</span> C * <span style="color: #20b2aa;">(</span>B_rescale <span style="color: #ff00ff;">-</span> Lhaze<span style="color: #20b2aa;">)</span>
+                        a <span style="color: #ff00ff;">&lt;-</span> C * G_rescale 
+                        xref <span style="color: #ff00ff;">&lt;-</span>  a * xref  <span style="color: #ff00ff;">+</span> b
+                <span style="color: #20b2aa;">}</span>
+
+        <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>reflectance<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                        B_rescale               <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$REF_OFFSET<span style="color: #20b2aa;">[</span>bandSet<span style="color: #20b2aa;">]</span>
+                        G_rescale               <span style="color: #ff00ff;">&lt;-</span> metaData$UNIFIED_METADATA$REF_GAIN<span style="color: #20b2aa;">[</span>bandSet<span style="color: #20b2aa;">]</span>
+                <span style="color: #20b2aa;">}</span> 
+
+
+                xref <span style="color: #ff00ff;">&lt;-</span>  <span style="color: #20b2aa;">(</span>G_rescale * xref <span style="color: #ff00ff;">+</span> B_rescale<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">/</span> suntheta
+
+
+        <span style="color: #20b2aa;">}</span>
+
+
+        x <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">stack</span><span style="color: #20b2aa;">(</span>xref,xtir, xexc<span style="color: #20b2aa;">)</span>
+        x <span style="color: #ff00ff;">&lt;-</span> x<span style="color: #20b2aa;">[[</span>origBands<span style="color: #20b2aa;">]]</span>
+
+        <span style="color: #00ffff;">return</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span>
+<span style="color: #20b2aa;">}</span>
+LANDSAT.db <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>
+                LANDSAT<span style="color: #daa520;">5</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">list</span> <span style="color: #20b2aa;">(</span>
+                                TM <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">data.frame</span><span style="color: #20b2aa;">(</span>band <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>B, <span style="color: #daa520;">1</span>:<span style="color: #daa520;">7</span><span style="color: #20b2aa;">)</span>,
+                                                bandtype <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span>REF, <span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span>, TIR, REF<span style="color: #20b2aa;">)</span>,
+                                                centerWavl <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">0</span>.<span style="color: #daa520;">485</span>, <span style="color: #daa520;">0</span>.<span style="color: #daa520;">569</span>, <span style="color: #daa520;">0</span>.<span style="color: #daa520;">66</span>, <span style="color: #daa520;">0</span>.<span style="color: #daa520;">840</span>, <span style="color: #daa520;">1</span>.<span style="color: #daa520;">676</span>, <span style="color: #daa520;">11</span>.<span style="color: #daa520;">435</span>, <span style="color: #daa520;">2</span>.<span style="color: #daa520;">223</span><span style="color: #20b2aa;">)</span>,
+                                                spatRes<span style="color: #daa520;">1</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">30</span>, <span style="color: #daa520;">7</span><span style="color: #20b2aa;">)</span>,
+                                                spatRes<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">30</span>,<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span>, <span style="color: #daa520;">60</span>, <span style="color: #daa520;">30</span><span style="color: #20b2aa;">)</span>, 
+                                                esun <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">1983</span>, <span style="color: #daa520;">1796</span>, <span style="color: #daa520;">1536</span>, <span style="color: #daa520;">1031</span>, <span style="color: #daa520;">220</span>, <span style="color: #daa520;">NA</span>, <span style="color: #daa520;">83</span>.<span style="color: #daa520;">44</span><span style="color: #20b2aa;">))</span>
+                <span style="color: #20b2aa;">)</span>,
+                LANDSAT<span style="color: #daa520;">7</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>
+                                ETM <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">data.frame</span><span style="color: #20b2aa;">(</span>band <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>B,<span style="color: #daa520;">1</span>:<span style="color: #daa520;">8</span><span style="color: #20b2aa;">)</span>,
+                                                bandtype <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span>REF, <span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span>, TIR, REF, PAN<span style="color: #20b2aa;">)</span>,
+                                                spatRes<span style="color: #daa520;">1</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">30</span>, <span style="color: #daa520;">7</span><span style="color: #20b2aa;">)</span>, <span style="color: #daa520;">15</span><span style="color: #20b2aa;">)</span>,
+                                                spatRes<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">30</span>,<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span>, <span style="color: #daa520;">60</span>, <span style="color: #daa520;">30</span>, <span style="color: #daa520;">15</span><span style="color: #20b2aa;">)</span>,  
+                                                centerWavl <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">0</span>.<span style="color: #daa520;">485</span>, <span style="color: #daa520;">0</span>.<span style="color: #daa520;">560</span>, <span style="color: #daa520;">0</span>.<span style="color: #daa520;">660</span>, <span style="color: #daa520;">0</span>.<span style="color: #daa520;">835</span>, <span style="color: #daa520;">1</span>.<span style="color: #daa520;">650</span>,<span style="color: #daa520;">11</span>.<span style="color: #daa520;">335</span>,<span style="color: #daa520;">2</span>.<span style="color: #daa520;">220</span>,<span style="color: #daa520;">0</span>.<span style="color: #daa520;">706</span><span style="color: #20b2aa;">)</span>,
+                                                esun <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">1997</span>,<span style="color: #daa520;">1812</span>,<span style="color: #daa520;">1533</span>,<span style="color: #daa520;">1039</span>,<span style="color: #daa520;">230</span>.<span style="color: #daa520;">8</span>,<span style="color: #daa520;">NA</span>,<span style="color: #daa520;">84</span>.<span style="color: #daa520;">9</span>,<span style="color: #daa520;">1362</span><span style="color: #20b2aa;">)</span>
+                                <span style="color: #20b2aa;">)</span>
+                <span style="color: #20b2aa;">)</span>,
+                LANDSAT<span style="color: #daa520;">8</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>
+                                OLI_TIRS <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">data.frame</span><span style="color: #20b2aa;">(</span>band <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>B,<span style="color: #daa520;">1</span>:<span style="color: #daa520;">11</span><span style="color: #20b2aa;">)</span>, BQA<span style="color: #20b2aa;">)</span>,
+                                                bandtype <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span>REF, <span style="color: #daa520;">7</span><span style="color: #20b2aa;">)</span>, PAN, REF, TIR, TIR, QA<span style="color: #20b2aa;">)</span>,
+                                                spatRes<span style="color: #daa520;">1</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">30</span>, <span style="color: #daa520;">7</span><span style="color: #20b2aa;">)</span>, <span style="color: #daa520;">15</span>, <span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">30</span>,<span style="color: #daa520;">4</span><span style="color: #20b2aa;">))</span>,
+                                                spatRes<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">30</span>, <span style="color: #daa520;">7</span><span style="color: #20b2aa;">)</span>, <span style="color: #daa520;">15</span>, <span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">30</span>,<span style="color: #daa520;">4</span><span style="color: #20b2aa;">))</span>,  
+                                                centerWavl <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">0</span>.<span style="color: #daa520;">44</span>,<span style="color: #daa520;">0</span>.<span style="color: #daa520;">48</span>,<span style="color: #daa520;">0</span>.<span style="color: #daa520;">56</span>,<span style="color: #daa520;">0</span>.<span style="color: #daa520;">655</span>,<span style="color: #daa520;">0</span>.<span style="color: #daa520;">865</span>,<span style="color: #daa520;">1</span>.<span style="color: #daa520;">61</span>,<span style="color: #daa520;">2</span>.<span style="color: #daa520;">2</span>,<span style="color: #daa520;">0</span>.<span style="color: #daa520;">59</span>,<span style="color: #daa520;">1</span>.<span style="color: #daa520;">37</span>,<span style="color: #daa520;">10</span>.<span style="color: #daa520;">6</span>,<span style="color: #daa520;">11</span>.<span style="color: #daa520;">5</span>, <span style="color: #daa520;">NA</span><span style="color: #20b2aa;">)</span>, 
+                                                esun <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #daa520;">NA</span>, <span style="color: #daa520;">2067</span>, <span style="color: #daa520;">1893</span>, <span style="color: #daa520;">1603</span>, <span style="color: #daa520;">972</span>.<span style="color: #daa520;">6</span>, <span style="color: #daa520;">245</span>, <span style="color: #daa520;">79</span>.<span style="color: #daa520;">72</span>, <span style="color: #daa520;">NA</span>, <span style="color: #daa520;">399</span>.<span style="color: #daa520;">7</span>, <span style="color: #daa520;">NA</span>, <span style="color: #daa520;">NA</span>, <span style="color: #daa520;">NA</span> <span style="color: #20b2aa;">)</span> 
+                                <span style="color: #20b2aa;">)</span>
+                <span style="color: #20b2aa;">)</span>
+<span style="color: #20b2aa;">)</span> 
+exponents <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span><span style="color: #ff00ff;">-</span><span style="color: #daa520;">4</span>, <span style="color: #ff00ff;">-</span><span style="color: #daa520;">2</span>, <span style="color: #ff00ff;">-</span><span style="color: #daa520;">1</span>, <span style="color: #ff00ff;">-</span>.<span style="color: #daa520;">7</span>, <span style="color: #ff00ff;">-</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span>
+<span style="color: #00ffff;">for</span><span style="color: #20b2aa;">(</span>s <span style="color: #00ffff;">in</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>LANDSAT.db<span style="color: #20b2aa;">)){</span>
+        bandType                <span style="color: #ff00ff;">&lt;-</span> LANDSAT.db<span style="color: #20b2aa;">[[</span>s<span style="color: #20b2aa;">]][[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]][</span>,bandtype<span style="color: #20b2aa;">]</span> <span style="color: #ff00ff;">==</span> REF
+        centerWavl              <span style="color: #ff00ff;">&lt;-</span> LANDSAT.db<span style="color: #20b2aa;">[[</span>s<span style="color: #20b2aa;">]][[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]][</span>bandType, centerWavl<span style="color: #20b2aa;">]</span> 
+        bands                   <span style="color: #ff00ff;">&lt;-</span> LANDSAT.db<span style="color: #20b2aa;">[[</span>s<span style="color: #20b2aa;">]][[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]][</span>bandType, band<span style="color: #20b2aa;">]</span>
+
+
+        TAB<span style="color: #daa520;">1</span>                    <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">sapply</span><span style="color: #20b2aa;">(</span>exponents, <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span> centerWavl ^ x<span style="color: #20b2aa;">)</span>
+        <span style="color: #ff6347;">rownames</span><span style="color: #20b2aa;">(</span>TAB<span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>  <span style="color: #ff00ff;">&lt;-</span> bands
+        <span style="color: #ff6347;">colnames</span><span style="color: #20b2aa;">(</span>TAB<span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>  <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">c</span><span style="color: #20b2aa;">(</span>veryClear, clear, moderate, hazy, veryHazy<span style="color: #20b2aa;">)</span>
+
+
+        TAB<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">lapply</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>B, <span style="color: #daa520;">1</span>:<span style="color: #daa520;">4</span><span style="color: #20b2aa;">)</span>, <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>SHVB<span style="color: #20b2aa;">){</span> <span style="color: #ff6347;">sweep</span><span style="color: #20b2aa;">(</span>TAB<span style="color: #daa520;">1</span>, <span style="color: #daa520;">2</span>, TAB<span style="color: #daa520;">1</span><span style="color: #20b2aa;">[</span>SHVB,<span style="color: #20b2aa;">]</span>, <span style="color: #ff00ff;">/</span><span style="color: #20b2aa;">)})</span>
+        TAB<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">do.call</span><span style="color: #20b2aa;">(</span>cbind, TAB<span style="color: #daa520;">2</span><span style="color: #20b2aa;">)</span>
+        <span style="color: #ff6347;">colnames</span><span style="color: #20b2aa;">(</span>TAB<span style="color: #daa520;">2</span><span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">rep</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>B, <span style="color: #daa520;">1</span>:<span style="color: #daa520;">4</span><span style="color: #20b2aa;">)</span>, each <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span>,_, <span style="color: #ff6347;">colnames</span><span style="color: #20b2aa;">(</span>TAB<span style="color: #daa520;">2</span><span style="color: #20b2aa;">))</span>
+
+        LANDSAT.db<span style="color: #20b2aa;">[[</span>s<span style="color: #20b2aa;">]][[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]]</span> <span style="color: #ff00ff;">&lt;-</span>  <span style="color: #ff6347;">merge</span><span style="color: #20b2aa;">(</span>LANDSAT.db<span style="color: #20b2aa;">[[</span>s<span style="color: #20b2aa;">]][[</span><span style="color: #daa520;">1</span><span style="color: #20b2aa;">]]</span> , TAB<span style="color: #daa520;">2</span>, by.x <span style="color: #ff00ff;">=</span> band, by.y <span style="color: #ff00ff;">=</span> row.names, all.x <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, sort <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+<span style="color: #20b2aa;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> readMeta.R</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+
+<pre class="src src-R"><span style="color: #ff6347;">readMeta</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>file, unifiedMetadata <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span><span style="color: #20b2aa;">){</span>
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!<span style="color: #ff6347;">grepl</span><span style="color: #20b2aa;">(</span>MTL, file<span style="color: #20b2aa;">)</span> &amp; !<span style="color: #ff6347;">grepl</span><span style="color: #20b2aa;">(</span>xml, file<span style="color: #20b2aa;">))</span> <span style="color: #00ffff;">warning</span><span style="color: #20b2aa;">(</span>The Landsat metadata file you have specified looks unusual. Typically the filename contains the string <span style="color: #00ff00;">'MTL'</span> or <span style="color: #00ff00;">'xml'</span>. Are you sure you specified the right file? \n I<span style="color: #00ff00;">'ll try to read it but check the results!)</span>
+
+
+<span style="color: #00ff00;">        metaDataFormat &lt;- if(grepl(xml, file)) XML else MTL</span>
+
+<span style="color: #00ff00;">        if(metaDataFormat == MTL) {</span>
+
+
+<span style="color: #00ff00;">                meta &lt;- read.delim(file, sep = =, head = FALSE, stringsAsFactors = FALSE, strip.white = TRUE, skip = </span><span style="color: #daa520;">1</span><span style="color: #00ff00;">, skipNul = TRUE)</span>
+<span style="color: #00ff00;">                meta &lt;- meta[-(nrow(meta)-c(</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">,</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">)),]</span>
+
+
+<span style="color: #00ff00;">                l &lt;- meta[grep(GROUP,meta[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]),]</span>
+
+
+<span style="color: #00ff00;">                meta &lt;- lapply(unique(l[,</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">]), FUN = function(x){</span>
+<span style="color: #00ff00;">                                        w &lt;- which(meta[,</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">] == x)</span>
+<span style="color: #00ff00;">                                        m &lt;- meta[(w[</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]+</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">):(w[</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">]-</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">),]</span>
+<span style="color: #00ff00;">                                        rownames(m) &lt;- m[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]</span>
+<span style="color: #00ff00;">                                        m &lt;- m[ , </span><span style="color: #daa520;">2</span><span style="color: #00ff00;">, drop = FALSE]</span>
+<span style="color: #00ff00;">                                        colnames(m) &lt;- VALUE</span>
+<span style="color: #00ff00;">                                        return(m)</span>
+<span style="color: #00ff00;">                                })</span>
+
+<span style="color: #00ff00;">                names(meta) &lt;- unique(l[,</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">])</span>
+
+
+<span style="color: #00ff00;">                legacy &lt;- PROCESSING_SOFTWARE %in% rownames(meta$PRODUCT_METADATA)</span>
+<span style="color: #00ff00;">                if(legacy) message(This scene was processed before August </span><span style="color: #daa520;">29</span><span style="color: #00ff00;">, </span><span style="color: #daa520;">2012</span><span style="color: #00ff00;">. Using MTL legacy format. Some minor infos such as SCENE_ID will be missing)</span>
+
+<span style="color: #00ff00;">                if(unifiedMetadata){</span>
+
+<span style="color: #00ff00;">                        meta[[UNIFIED_METADATA]] &lt;- list(</span>
+<span style="color: #00ff00;">                                        SPACECRAFT_ID           = {SAT &lt;- paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(LANDSAT, .getNumeric(meta$PRODUCT_METADATA[SPACECRAFT_ID,]))},</span>
+<span style="color: #00ff00;">                                        SENSOR_ID                       = meta$PRODUCT_METADATA[SENSOR_ID,]     ,                       </span>
+<span style="color: #00ff00;">                                        SCENE_ID                        = meta$METADATA_FILE_INFO[LANDSAT_SCENE_ID,],  </span>
+<span style="color: #00ff00;">                                        DATA_TYPE                       = if(!legacy) meta$PRODUCT_METADATA[DATA_TYPE,] else meta$PRODUCT_METADATA[PRODUCT_TYPE,],</span>
+<span style="color: #00ff00;">                                        ACQUISITION_DATE        = {date &lt;- if(!legacy) meta$PRODUCT_METADATA[DATE_ACQUIRED,] else meta$PRODUCT_METADATA[ACQUISITION_DATE,]},</span>
+<span style="color: #00ff00;">                                        PROCESSING_DATE         = if(!legacy) meta$METADATA_FILE_INFO[FILE_DATE,] else meta$METADATA_FILE_INFO[PRODUCT_CREATION_TIME,], </span>
+<span style="color: #00ff00;">                                        PATH                            = as.numeric(meta$PRODUCT_METADATA[WRS_PATH,]),</span>
+<span style="color: #00ff00;">                                        ROW                                     = if(!legacy) as.numeric(meta$PRODUCT_METADATA[WRS_ROW,]) else as.numeric(meta$PRODUCT_METADATA[STARTING_ROW,]),</span>
+<span style="color: #00ff00;">                                        RADIOMETRIC_RES         = if(SAT == LANDSAT</span><span style="color: #daa520;">8</span><span style="color: #00ff00;">) </span><span style="color: #daa520;">16</span><span style="color: #00ff00;"> else </span><span style="color: #daa520;">8</span><span style="color: #00ff00;">,                                </span>
+<span style="color: #00ff00;">                                        FILES                           = {files &lt;- row.names(meta[[PRODUCT_METADATA]])[grep(^.*FILE_NAME, row.names(meta$PRODUCT_METADATA))]</span>
+<span style="color: #00ff00;">                                                files &lt;- files[grep(^.*BAND,files)]</span>
+<span style="color: #00ff00;">                                                files &lt;- meta[[PRODUCT_METADATA]][files,]       },</span>
+
+<span style="color: #00ff00;">                                        BANDS                           = {junk &lt;- unique(sapply(str_split(files, _B), [ ,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;"> ))</span>
+<span style="color: #00ff00;">                                                bds &lt;- str_replace(str_replace(files, paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(junk,_), ), {if(SAT==LANDSAT</span><span style="color: #daa520;">5</span><span style="color: #00ff00;">) </span><span style="color: #daa520;">0</span><span style="color: #00ff00;">.TIF else .TIF}, )</span>
+<span style="color: #00ff00;">                                        },</span>
+<span style="color: #00ff00;">                                        BAND_TYPE                       = {</span>
+<span style="color: #00ff00;">                                                ty &lt;- rep(image, length(bds))</span>
+<span style="color: #00ff00;">                                                ty[grepl(QA, bds)] &lt;- qa</span>
+<span style="color: #00ff00;">                                                ty</span>
+<span style="color: #00ff00;">                                        },</span>
+
+<span style="color: #00ff00;">                                        NA_VALUE                        = rep(</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">, length(ty)),</span>
+<span style="color: #00ff00;">                                        SUN_AZIMUTH                     = if(!legacy) as.numeric(meta$IMAGE_ATTRIBUTES[SUN_AZIMUTH,]) else as.numeric(meta$PRODUCT_PARAMETERS[SUN_AZIMUTH,]),</span>
+<span style="color: #00ff00;">                                        SUN_ELEVATION           = if(!legacy) as.numeric(meta$IMAGE_ATTRIBUTES[SUN_ELEVATION,]) else as.numeric(meta$PRODUCT_PARAMETERS[SUN_ELEVATION,]),</span>
+<span style="color: #00ff00;">                                        EARTH_SUN_DISTANCE  = {es &lt;- meta$IMAGE_ATTRIBUTES[EARTH_SUN_DISTANCE,]</span>
+<span style="color: #00ff00;">                                                if(is.null(es) || is.na(es)) es &lt;- .ESdist(date)</span>
+<span style="color: #00ff00;">                                                as.numeric(es)}</span>
+<span style="color: #00ff00;">                        )</span>
+
+
+<span style="color: #00ff00;">                        RADCOR &lt;-  if(!legacy) { list(          </span>
+<span style="color: #00ff00;">                                                                RAD_OFFSET                              = {</span>
+<span style="color: #00ff00;">                                                                        r &lt;- meta$RADIOMETRIC_RESCALING</span>
+<span style="color: #00ff00;">                                                                        r[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]           &lt;- as.numeric(r[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">])</span>
+<span style="color: #00ff00;">                                                                        bandnames       &lt;- str_c(B, str_replace(rownames(r), ^.*_BAND_, ))</span>
+<span style="color: #00ff00;">                                                                        go                      &lt;- grep(RADIANCE_ADD*, rownames(r))</span>
+<span style="color: #00ff00;">                                                                        ro                      &lt;- r[go,]</span>
+<span style="color: #00ff00;">                                                                        names(ro)       &lt;- bandnames[go]</span>
+<span style="color: #00ff00;">                                                                        ro},</span>
+<span style="color: #00ff00;">                                                                RAD_GAIN                                = {go                   &lt;- grep(RADIANCE_MULT*, rownames(r))</span>
+<span style="color: #00ff00;">                                                                        ro                      &lt;- r[go,]</span>
+<span style="color: #00ff00;">                                                                        names(ro)       &lt;- bandnames[go]</span>
+<span style="color: #00ff00;">                                                                        ro},</span>
+<span style="color: #00ff00;">                                                                REF_OFFSET                              = {     go                      &lt;- grep(REFLECTANCE_ADD*, rownames(r))</span>
+<span style="color: #00ff00;">                                                                        ro                      &lt;- r[go,]</span>
+<span style="color: #00ff00;">                                                                        names(ro)       &lt;- bandnames[go]</span>
+<span style="color: #00ff00;">                                                                        ro},</span>
+<span style="color: #00ff00;">                                                                REF_GAIN                                = {go                   &lt;- grep(REFLECTANCE_MULT*, rownames(r))</span>
+<span style="color: #00ff00;">                                                                        ro                      &lt;- r[go,]</span>
+<span style="color: #00ff00;">                                                                        names(ro)       &lt;- bandnames[go]</span>
+<span style="color: #00ff00;">                                                                        ro})</span>
+
+<span style="color: #00ff00;">                                        } else {</span>
+
+<span style="color: #00ff00;">                                                bandnames &lt;- paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(B, .getNumeric(rownames(meta$MIN_MAX_RADIANCE)))</span>
+<span style="color: #00ff00;">                                                bandnames &lt;- bandnames[seq(</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">, length(bandnames), </span><span style="color: #daa520;">2</span><span style="color: #00ff00;">)]</span>
+
+<span style="color: #00ff00;">                                                L &lt;- diff(as.numeric(meta$MIN_MAX_RADIANCE[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]))</span>
+<span style="color: #00ff00;">                                                L &lt;- L[seq(</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">, length(L), </span><span style="color: #daa520;">2</span><span style="color: #00ff00;">)] </span>
+
+<span style="color: #00ff00;">                                                Q &lt;- diff(as.numeric(meta$MIN_MAX_PIXEL_VALUE[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]))  </span>
+<span style="color: #00ff00;">                                                Q &lt;- Q[seq(</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">, length(Q), </span><span style="color: #daa520;">2</span><span style="color: #00ff00;">)]</span>
+
+<span style="color: #00ff00;">                                                RAD_GAIN        &lt;- L/Q</span>
+<span style="color: #00ff00;">                                                RAD_OFFSET      &lt;- as.numeric(meta$MIN_MAX_RADIANCE[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">])[seq(</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">,nrow(meta$MIN_MAX_RADIANCE),</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">)] - (RAD_GAIN) * </span><span style="color: #daa520;">1</span>
+
+<span style="color: #00ff00;">                                                names(RAD_OFFSET) &lt;- names(RAD_GAIN) &lt;- bandnames</span>
+
+<span style="color: #00ff00;">                                                list(RAD_OFFSET = RAD_OFFSET, RAD_GAIN = RAD_GAIN)</span>
+
+<span style="color: #00ff00;">                                        }</span>
+
+<span style="color: #00ff00;">         if(SAT == LANDSAT</span><span style="color: #daa520;">8</span><span style="color: #00ff00;">){</span>
+<span style="color: #00ff00;">                                RADCOR$K</span><span style="color: #daa520;">1</span><span style="color: #00ff00;"> ={ r &lt;- meta$TIRS_THERMAL_CONSTANTS</span>
+<span style="color: #00ff00;">                                        r[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]           &lt;- as.numeric(r[,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">])</span>
+<span style="color: #00ff00;">                                        bandnames       &lt;- str_c(B, str_replace(rownames(r), ^.*_BAND_, ))</span>
+<span style="color: #00ff00;">                                        go                      &lt;- grep(K</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">, rownames(r))</span>
+<span style="color: #00ff00;">                                        ro                      &lt;- r[go,]</span>
+<span style="color: #00ff00;">                                        names(ro)       &lt;- bandnames[go]</span>
+<span style="color: #00ff00;">                                        ro}</span>
+<span style="color: #00ff00;">                                RADCOR$K</span><span style="color: #daa520;">2</span><span style="color: #00ff00;"> = {go                 &lt;- grep(K</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">, rownames(r))</span>
+<span style="color: #00ff00;">                                        ro                      &lt;- r[go,]</span>
+<span style="color: #00ff00;">                                        names(ro)       &lt;- bandnames[go]</span>
+<span style="color: #00ff00;">                                        ro}                             </span>
+<span style="color: #00ff00;">                        } else {</span>
+<span style="color: #00ff00;">                                TAB</span><span style="color: #daa520;">7</span><span style="color: #00ff00;"> &lt;- list(LANDSAT</span><span style="color: #daa520;">4</span><span style="color: #00ff00;"> = c(B</span><span style="color: #daa520;">6</span><span style="color: #00ff00;">=</span><span style="color: #daa520;">671</span><span style="color: #00ff00;">.</span><span style="color: #daa520;">62</span><span style="color: #00ff00;">,B</span><span style="color: #daa520;">6</span><span style="color: #00ff00;">=</span><span style="color: #daa520;">1284</span><span style="color: #00ff00;">.</span><span style="color: #daa520;">3</span><span style="color: #00ff00;">), </span>
+<span style="color: #00ff00;">                                                LANDSAT</span><span style="color: #daa520;">5</span><span style="color: #00ff00;"> = c(B</span><span style="color: #daa520;">6</span><span style="color: #00ff00;">=</span><span style="color: #daa520;">607</span><span style="color: #00ff00;">.</span><span style="color: #daa520;">76</span><span style="color: #00ff00;">,B</span><span style="color: #daa520;">6</span><span style="color: #00ff00;">=</span><span style="color: #daa520;">1260</span><span style="color: #00ff00;">.</span><span style="color: #daa520;">56</span><span style="color: #00ff00;">),</span>
+<span style="color: #00ff00;">                                                LANDSAT</span><span style="color: #daa520;">7</span><span style="color: #00ff00;"> = c(B</span><span style="color: #daa520;">6</span><span style="color: #00ff00;">=</span><span style="color: #daa520;">666</span><span style="color: #00ff00;">.</span><span style="color: #daa520;">09</span><span style="color: #00ff00;">,B</span><span style="color: #daa520;">6</span><span style="color: #00ff00;">=</span><span style="color: #daa520;">1282</span><span style="color: #00ff00;">.</span><span style="color: #daa520;">71</span><span style="color: #00ff00;">))</span>
+
+<span style="color: #00ff00;">                                RADCOR$K</span><span style="color: #daa520;">1</span><span style="color: #00ff00;"> &lt;- TAB</span><span style="color: #daa520;">7</span><span style="color: #00ff00;">[[SAT]][</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]</span>
+<span style="color: #00ff00;">                                RADCOR$K</span><span style="color: #daa520;">2</span><span style="color: #00ff00;"> &lt;- TAB</span><span style="color: #daa520;">7</span><span style="color: #00ff00;">[[SAT]][</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">]</span>
+<span style="color: #00ff00;">                        }</span>
+
+<span style="color: #00ff00;">                        meta[[UNIFIED_METADATA]] &lt;- c(meta[[UNIFIED_METADATA]], RADCOR)</span>
+<span style="color: #00ff00;">                }</span>
+<span style="color: #00ff00;">        } else {</span>
+
+<span style="color: #00ff00;">                meta &lt;- xmlParse(file)</span>
+<span style="color: #00ff00;">                meta &lt;- xmlToList(meta)</span>
+<span style="color: #00ff00;">                names(meta$bands) &lt;- str_replace_all(unlist(sapply(meta$bands, [, long_name)),  , _)</span>
+
+<span style="color: #00ff00;">                if(unifiedMetadata){</span>
+
+<span style="color: #00ff00;">                        atts &lt;- sapply(meta$bands, [, .attrs)</span>
+
+<span style="color: #00ff00;">                        meta[[UNIFIED_METADATA]] &lt;- list(</span>
+<span style="color: #00ff00;">                                        SPACECRAFT_ID           = {SAT &lt;- paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(LANDSAT, .getNumeric(meta$global_metadata$satellite))},</span>
+<span style="color: #00ff00;">                                        SENSOR_ID                       = meta$global_metadata$instrument,                      </span>
+<span style="color: #00ff00;">                                        SCENE_ID                        = SID &lt;- str_replace(meta$global_metadata$lpgs_metadata_file, _MTL.txt, ),  </span>
+<span style="color: #00ff00;">                                        DATA_TYPE                       = if(meta$bands[[</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]]$.attrs[product] == sr_refl) SR, </span>
+<span style="color: #00ff00;">                                        ACQUISITION_DATE        = {date &lt;- meta$global_metadata$acquisition_date},</span>
+<span style="color: #00ff00;">                                        PROCESSING_DATE         = meta$bands[[</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]]$production_date, </span>
+<span style="color: #00ff00;">                                        PATH                            = as.numeric(meta$global_metadata$wrs[path]),</span>
+<span style="color: #00ff00;">                                        ROW                                     = as.numeric(meta$global_metadata$wrs[row]),</span>
+
+<span style="color: #00ff00;">                                        FILES                           = {files &lt;- sapply(meta$bands, [[, file_name)</span>
+<span style="color: #00ff00;">                                                names(files) &lt;- NULL</span>
+<span style="color: #00ff00;">                                                files},                                 </span>
+<span style="color: #00ff00;">                                        BANDS                           = {     </span>
+<span style="color: #00ff00;">                                                bds &lt;- grepl(_band, files)</span>
+<span style="color: #00ff00;">                                                toa &lt;- grepl(_toa_, files)</span>
+<span style="color: #00ff00;">                                                qas &lt;- grepl(qa, files) </span>
+<span style="color: #00ff00;">                                                bnames                          &lt;- toupper(str_replace(files, paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(SID, _), ))                                        </span>
+<span style="color: #00ff00;">                                                bnames[bds]                     &lt;- paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(B, .getNumeric(bnames[bds]))</span>
+<span style="color: #00ff00;">                                                bnames[bds &amp; qas]       &lt;- paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(bnames[bds &amp; qas], _QA)</span>
+<span style="color: #00ff00;">                                                bnames                          &lt;- str_replace(str_replace(str_replace(bnames, \\.TIF, ), SR_, ), TOA_, )</span>
+<span style="color: #00ff00;">                                                bnames[toa]             &lt;- paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(bnames[toa], _TOA)</span>
+<span style="color: #00ff00;">                                                bnames</span>
+<span style="color: #00ff00;">                                        },</span>
+<span style="color: #00ff00;">                                        BAND_TYPE                       = {ty &lt;- sapply(atts, [ , category)</span>
+<span style="color: #00ff00;">                                                names(ty) &lt;- NULL</span>
+<span style="color: #00ff00;">                                                ty</span>
+<span style="color: #00ff00;">                                        },</span>
+<span style="color: #00ff00;">                                        NA_VALUE                        = as.numeric(sapply(atts, [ , fill_value)),</span>
+<span style="color: #00ff00;">                                        SATURATE_VALUE          = as.numeric(sapply(atts, [ , saturate_value)),</span>
+<span style="color: #00ff00;">                                        SCALE_FACTOR            = as.numeric(sapply(atts, [ , scale_factor)),</span>
+
+<span style="color: #00ff00;">                                        SUN_AZIMUTH                     = as.numeric(meta$global_metadata$solar_angles[azimuth]),</span>
+<span style="color: #00ff00;">                                        SUN_ELEVATION           = </span><span style="color: #daa520;">90</span><span style="color: #00ff00;"> - as.numeric(meta$global_metadata$solar_angles[zenith]),</span>
+<span style="color: #00ff00;">                                        EARTH_SUN_DISTANCE  = {.ESdist(date)}</span>
+<span style="color: #00ff00;">                        )</span>
+
+<span style="color: #00ff00;">                }</span>
+
+<span style="color: #00ff00;">        }</span>
+<span style="color: #00ff00;">        return(meta)</span>
+<span style="color: #00ff00;">}</span>
+<span style="color: #ff6347;">stackMeta</span><span style="color: #00ff00;"> &lt;- function(file, allResolutions = FALSE,  resampleTIR = FALSE, resamplingMethod = ngb, products = c(image, index, qa)){</span>
+
+
+<span style="color: #00ff00;">        meta  &lt;- readMeta(file)</span>
+<span style="color: #00ff00;">        files &lt;- meta$UNIFIED_METADATA$FILES</span>
+
+
+<span style="color: #00ff00;">        path  &lt;- if(basename(file) != file)  str_replace(file, basename(file), ) else NULL</span>
+
+
+<span style="color: #00ff00;">        rl &lt;- lapply(paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(path, files), raster)</span>
+<span style="color: #00ff00;">        resL &lt;- lapply(lapply(rl, res),[, </span><span style="color: #daa520;">1</span><span style="color: #00ff00;">)</span>
+
+<span style="color: #00ff00;">        if(any(resL &gt; </span><span style="color: #daa520;">30</span><span style="color: #00ff00;">)) {</span>
+<span style="color: #00ff00;">                message(Your Landsat data includes TIR band(s) which were not resampled to </span><span style="color: #daa520;">30</span><span style="color: #00ff00;">m.</span>
+<span style="color: #00ff00;">                                                \nYou can set resampleTIR = TRUE to resample TIR bands to </span><span style="color: #daa520;">30</span><span style="color: #00ff00;">m if you want a single stack)</span>
+
+
+<span style="color: #00ff00;">                if(resampleTIR){</span>
+<span style="color: #00ff00;">                        for(i in which(resL &gt; </span><span style="color: #daa520;">30</span><span style="color: #00ff00;">))</span>
+<span style="color: #00ff00;">                                rl[[i]] &lt;- resample(rl[[i]], rl[[which(resL == </span><span style="color: #daa520;">30</span><span style="color: #00ff00;">)[</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]]], method = resamplingMethod)             </span>
+<span style="color: #00ff00;">                }</span>
+<span style="color: #00ff00;">        }</span>
+
+
+<span style="color: #00ff00;">        returnRes &lt;- if(allResolutions) unlist(unique(resL)) else </span><span style="color: #daa520;">30</span>
+
+<span style="color: #00ff00;">        LS      &lt;- lapply(returnRes, function(x){</span>
+<span style="color: #00ff00;">                                s                       &lt;- stack(rl[resL == x])</span>
+<span style="color: #00ff00;">                                names(s)        &lt;- meta$UNIFIED_METADATA$BANDS[resL == x]</span>
+<span style="color: #00ff00;">                                NAvalue(s)      &lt;- meta$UNIFIED_METADATA$NA_VALUE[resL == x]    </span>
+<span style="color: #00ff00;">                                s &lt;- s[[ which(names(s) %in% meta$UNIFIED_METADATA$BANDS[meta$UNIFIED_METADATA$BAND_TYPE %in% products])        ]]</span>
+<span style="color: #00ff00;">                                s</span>
+<span style="color: #00ff00;">                        })</span>
+
+<span style="color: #00ff00;">        if(!allResolutions) LS &lt;- LS[[</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">]]</span>
+
+<span style="color: #00ff00;">        return(LS)</span>
+<span style="color: #00ff00;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> RStoolbox.R</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+
+<pre class="src src-R"><span style="color: #daa520;">NULL</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> spectralIndices.R</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+
+<pre class="src src-R"><span style="color: #ff6347;">spectralIndices</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>inputRaster, indices <span style="color: #ff00ff;">=</span> NDVI, sensor, bands , maskRaster <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">NULL</span>, verbose <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span>, ... <span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+
+
+
+
+
+
+
+
+        SENSORS <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>
+                        LANDSAT<span style="color: #daa520;">5</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>BLUE <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">1</span>, GREEN <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">2</span>, RED <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">3</span>, NIR <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">4</span>, MIR <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">7</span><span style="color: #20b2aa;">)</span>,
+                        LANDSAT<span style="color: #daa520;">7</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>BLUE <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">1</span>, GREEN <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">2</span>, RED <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">3</span>, NIR <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">4</span><span style="color: #20b2aa;">)</span>,
+                        LANDSAT<span style="color: #daa520;">8</span> <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>BLUE <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">2</span>, GREEN <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">3</span>, RED <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">4</span>, NIR <span style="color: #ff00ff;">=</span> B<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span>
+        <span style="color: #20b2aa;">)</span>
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!<span style="color: #ff6347;">missing</span><span style="color: #20b2aa;">(</span>sensor<span style="color: #20b2aa;">)){</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!sensor <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>SENSORS<span style="color: #20b2aa;">))</span> <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>Unknown sensor. Please provide the <span style="color: #00ff00;">'bands'</span> argument or <span style="color: #00ff00;">'sensor'</span> as one of , <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>SENSORS<span style="color: #20b2aa;">)))</span>
+                bands <span style="color: #ff00ff;">&lt;-</span> SENSORS<span style="color: #20b2aa;">[[</span>sensor<span style="color: #20b2aa;">]]</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">any</span><span style="color: #20b2aa;">(</span>!bands <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>inputRaster<span style="color: #20b2aa;">)))</span> <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>Bandnames of inputRaster do not match the required format or are missing. Please provide <span style="color: #00ff00;">'bands'</span> argument manually or make sure the <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>inputRaster<span style="color: #20b2aa;">)</span> follow the <span style="color: #00ff00;">'B</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">'</span> <span style="color: #00ff00;">'B</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">'</span>  ... format <span style="color: #00ffff;">if</span> you want to make use of the <span style="color: #00ff00;">'sensor'</span> argument.<span style="color: #20b2aa;">)</span>
+        <span style="color: #20b2aa;">}</span>
+        bands <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">lapply</span><span style="color: #20b2aa;">(</span>bands, <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.character</span><span style="color: #20b2aa;">(</span>x<span style="color: #20b2aa;">))</span> <span style="color: #ff6347;">which</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>inputRaster<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">==</span> x<span style="color: #20b2aa;">)</span> <span style="color: #00ffff;">else</span> x <span style="color: #20b2aa;">)</span>
+
+
+        INDICES <span style="color: #ff00ff;">&lt;-</span>  <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>
+                        SR              <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>NIR, RED<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>NIR <span style="color: #ff00ff;">/</span> RED<span style="color: #20b2aa;">}</span>,
+                        DVI             <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>NIR, RED<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>NIR<span style="color: #ff00ff;">-</span>RED<span style="color: #20b2aa;">}</span>,
+                        NDVI    <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>NIR, RED<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{(</span>NIR<span style="color: #ff00ff;">-</span>RED<span style="color: #20b2aa;">)</span><span style="color: #ff00ff;">/</span><span style="color: #20b2aa;">(</span>NIR<span style="color: #ff00ff;">+</span>RED<span style="color: #20b2aa;">)}</span>, 
+                        TVI     <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>NIR, RED<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{(((</span>NIR<span style="color: #ff00ff;">-</span>RED<span style="color: #20b2aa;">)</span><span style="color: #ff00ff;">/</span><span style="color: #20b2aa;">(</span>NIR<span style="color: #ff00ff;">+</span>RED<span style="color: #20b2aa;">))</span><span style="color: #ff00ff;">+</span><span style="color: #daa520;">0</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span>^<span style="color: #daa520;">0</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">}</span>, 
+                        MSAVI   <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>NIR, RED<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>NIR <span style="color: #ff00ff;">+</span> <span style="color: #daa520;">0</span>.<span style="color: #daa520;">5</span> <span style="color: #ff00ff;">-</span> <span style="color: #20b2aa;">(</span><span style="color: #daa520;">0</span>.<span style="color: #daa520;">5</span> * <span style="color: #ff6347;">sqrt</span><span style="color: #20b2aa;">((</span><span style="color: #daa520;">2</span> * NIR <span style="color: #ff00ff;">+</span> <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>^<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">-</span> <span style="color: #daa520;">8</span> * <span style="color: #20b2aa;">(</span>NIR <span style="color: #ff00ff;">-</span> <span style="color: #20b2aa;">(</span><span style="color: #daa520;">2</span> * RED<span style="color: #20b2aa;">))))}</span>,
+                        MSAVI<span style="color: #daa520;">2</span>  <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>NIR, RED<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{(</span><span style="color: #daa520;">2</span> * <span style="color: #20b2aa;">(</span>NIR <span style="color: #ff00ff;">+</span> <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">-</span> <span style="color: #ff6347;">sqrt</span><span style="color: #20b2aa;">((</span><span style="color: #daa520;">2</span> * NIR <span style="color: #ff00ff;">+</span> <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span>^<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">-</span> <span style="color: #daa520;">8</span> * <span style="color: #20b2aa;">(</span>NIR <span style="color: #ff00ff;">-</span> RED<span style="color: #20b2aa;">)))</span> <span style="color: #ff00ff;">/</span> <span style="color: #daa520;">2</span><span style="color: #20b2aa;">}</span>,
+                        GEMI    <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>NIR, RED<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{(((</span>NIR^<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">-</span> RED^<span style="color: #daa520;">2</span><span style="color: #20b2aa;">)</span> * <span style="color: #daa520;">2</span> <span style="color: #ff00ff;">+</span> <span style="color: #20b2aa;">(</span>NIR * <span style="color: #daa520;">1</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">+</span> <span style="color: #20b2aa;">(</span>RED * <span style="color: #daa520;">0</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">/</span> <span style="color: #20b2aa;">(</span>NIR <span style="color: #ff00ff;">+</span> RED <span style="color: #ff00ff;">+</span> <span style="color: #daa520;">0</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">))</span> * <span style="color: #20b2aa;">(</span><span style="color: #daa520;">1</span> <span style="color: #ff00ff;">-</span> <span style="color: #20b2aa;">((((</span>NIR^<span style="color: #daa520;">2</span> <span style="color: #ff00ff;">-</span> RED^<span style="color: #daa520;">2</span><span style="color: #20b2aa;">)</span> * <span style="color: #daa520;">2</span> <span style="color: #ff00ff;">+</span> <span style="color: #20b2aa;">(</span>NIR * <span style="color: #daa520;">1</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">+</span> <span style="color: #20b2aa;">(</span>RED * <span style="color: #daa520;">0</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">/</span> <span style="color: #20b2aa;">(</span>NIR <span style="color: #ff00ff;">+</span> RED <span style="color: #ff00ff;">+</span> <span style="color: #daa520;">0</span>.<span style="color: #daa520;">5</span><span style="color: #20b2aa;">))</span> * <span style="color: #daa520;">0</span>.<span style="color: #daa520;">25</span><span style="color: #20b2aa;">))</span> <span style="color: #ff00ff;">-</span> <span style="color: #20b2aa;">((</span>RED <span style="color: #ff00ff;">-</span> <span style="color: #daa520;">0</span>.<span style="color: #daa520;">125</span><span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">/</span> <span style="color: #20b2aa;">(</span><span style="color: #daa520;">1</span> <span style="color: #ff00ff;">-</span> RED<span style="color: #20b2aa;">))}</span>,                   
+                        SLAVI   <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>RED, MIR<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>NIR <span style="color: #ff00ff;">/</span> <span style="color: #20b2aa;">(</span>RED <span style="color: #ff00ff;">+</span> MIR<span style="color: #20b2aa;">)}</span>,
+                        EVI             <span style="color: #ff00ff;">=</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>NIR, RED, BLUE<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>G * <span style="color: #20b2aa;">((</span>NIR <span style="color: #ff00ff;">-</span> RED<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">/</span> <span style="color: #20b2aa;">(</span>NIR <span style="color: #ff00ff;">+</span> C<span style="color: #daa520;">1</span> * RED <span style="color: #ff00ff;">-</span> C<span style="color: #daa520;">2</span> * BLUE <span style="color: #ff00ff;">+</span> L<span style="color: #20b2aa;">))}</span>
+        <span style="color: #20b2aa;">)</span>
+
+
+        args <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">lapply</span><span style="color: #20b2aa;">(</span>indices, <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>index<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                                need <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">formals</span><span style="color: #20b2aa;">(</span>INDICES<span style="color: #20b2aa;">[[</span>index<span style="color: #20b2aa;">]]))</span>        
+                                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">any</span><span style="color: #20b2aa;">(</span>!need <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>bands<span style="color: #20b2aa;">)))</span> <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>Band <span style="color: #ff6347;">specification</span><span style="color: #20b2aa;">(</span>s<span style="color: #20b2aa;">)</span> of <span style="color: #ff00ff;">&gt;&gt;</span> , <span style="color: #ff6347;">paste</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>bands<span style="color: #20b2aa;">)[</span>!<span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>bands<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">%</span><span style="color: #00ffff;">in</span><span style="color: #ff00ff;">%</span> need<span style="color: #20b2aa;">]</span>, collapse <span style="color: #ff00ff;">=</span> ,<span style="color: #20b2aa;">)</span>, 
+                                                         <span style="color: #ff00ff;">&lt;&lt;</span> are missing or do not match layer names <span style="color: #00ffff;">in</span> the brick<span style="color: #ff00ff;">/</span>stack. \nPlease specify the correct layer number or name <span style="color: #00ffff;">in</span> a list, e.g. bands <span style="color: #ff00ff;">=</span> <span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>RED <span style="color: #ff00ff;">=</span> <span style="color: #00ff00;">'B</span><span style="color: #daa520;">4</span><span style="color: #00ff00;">'</span>, NIR <span style="color: #ff00ff;">=</span> <span style="color: #00ff00;">'B</span><span style="color: #daa520;">5</span><span style="color: #00ff00;">'</span><span style="color: #20b2aa;">)</span>, call. <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+                                need <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">unlist</span><span style="color: #20b2aa;">(</span>bands<span style="color: #20b2aa;">[</span>need<span style="color: #20b2aa;">])</span>
+                        <span style="color: #20b2aa;">})</span>
+        <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>args<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> indices 
+
+
+        inList <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">lapply</span><span style="color: #20b2aa;">(</span>indices, <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>index<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>verbose<span style="color: #20b2aa;">)</span> <span style="color: #ff6347;">print</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #daa520;">0</span><span style="color: #20b2aa;">(</span>Calculating , index<span style="color: #20b2aa;">))</span>
+                        m<span style="color: #ff00ff;">&lt;-</span>     <span style="color: #ff6347;">overlay</span><span style="color: #20b2aa;">(</span>inputRaster<span style="color: #20b2aa;">[[</span>args<span style="color: #20b2aa;">[[</span>index<span style="color: #20b2aa;">]]]]</span>, fun <span style="color: #ff00ff;">=</span> INDICES<span style="color: #20b2aa;">[[</span>index<span style="color: #20b2aa;">]])</span>
+                        <span style="color: #20b2aa;">})</span>
+
+
+        outStack <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff6347;">stack</span><span style="color: #20b2aa;">(</span>inList<span style="color: #20b2aa;">)</span>
+
+
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">any</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">grepl</span><span style="color: #20b2aa;">(</span>file, <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">list</span><span style="color: #20b2aa;">(</span>...<span style="color: #20b2aa;">)))))</span> outStack <span style="color: #ff00ff;">&lt;-</span>  <span style="color: #ff6347;">writeRaster</span><span style="color: #20b2aa;">(</span>outStack, ...<span style="color: #20b2aa;">)</span>
+
+        <span style="color: #ff6347;">names</span><span style="color: #20b2aa;">(</span>outStack<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">&lt;-</span> indices       
+        <span style="color: #00ffff;">return</span><span style="color: #20b2aa;">(</span>outStack<span style="color: #20b2aa;">)</span>
+<span style="color: #20b2aa;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> superClass.R</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+
+<pre class="src src-R"><span style="color: #ff6347;">superClass</span> <span style="color: #ff00ff;">&lt;-</span> <span style="color: #00ffff;">function</span><span style="color: #20b2aa;">(</span>inputRaster, trainingData, classAttributes <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">NULL</span>, nSamples <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">100</span>, filename <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">NULL</span>, maskRaster <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">NULL</span>, verbose <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">FALSE</span>, predict <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, overwrite <span style="color: #ff00ff;">=</span> <span style="color: #daa520;">TRUE</span>, ...<span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+
+
+
+
+
+
+
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!<span style="color: #ff6347;">inherits</span><span style="color: #20b2aa;">(</span>inputRaster, Raster<span style="color: #20b2aa;">))</span> <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>inputRaster must be a raster <span style="color: #ff6347;">object</span> <span style="color: #20b2aa;">(</span>RasterLayer,RasterBrick or RasterStack<span style="color: #20b2aa;">)</span>, call.<span style="color: #ff00ff;">=</span><span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span>!<span style="color: #ff6347;">inherits</span><span style="color: #20b2aa;">(</span>trainingData, SpatialPolygonsDataFrame<span style="color: #20b2aa;">))</span> <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span>traingData must be a SpatialPolygonsDataFrame, call.<span style="color: #ff00ff;">=</span><span style="color: #daa520;">FALSE</span><span style="color: #20b2aa;">)</span>
+
+
+        <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">is.null</span><span style="color: #20b2aa;">(</span>classAttributes<span style="color: #20b2aa;">)){</span>
+                <span style="color: #00ffff;">if</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">ncol</span><span style="color: #20b2aa;">(</span>trainingData<span style="color: #20b2aa;">)</span> <span style="color: #ff00ff;">==</span> <span style="color: #daa520;">1</span><span style="color: #20b2aa;">)</span> <span style="color: #20b2aa;">{</span>
+                        classAttributes <span style="color: #ff00ff;">&lt;-</span> <span style="color: #daa520;">1</span>
+                        <span style="color: #00ffff;">message</span><span style="color: #20b2aa;">(</span>You did not specify the classAttributes column. \nSince your trainingData only contains one column we assume this is it<span style="color: #20b2aa;">)</span>
+                <span style="color: #20b2aa;">}</span> <span style="color: #00ffff;">else</span> <span style="color: #20b2aa;">{</span>
+                        <span style="color: #00ffff;">stop</span><span style="color: #20b2aa;">(</span><span style="color: #ff6347;">paste</span><span style="color: #20b2aa;">(</span>Dont<span style="color: #00ff00;">'t know which column in trainingData contains the class attribute. \nPlease specify classAttributes as one of: , paste(colnames(trainingData@data),collapse=, )), call. = FALSE)</span>
+<span style="color: #00ff00;">                }</span>
+<span style="color: #00ff00;">        } </span>
+<span style="color: #00ff00;">        if(!classAttributes %in% colnames(trainingData@data)) </span>
+<span style="color: #00ff00;">                stop(paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(The column , classAttributes,  does not exist in trainingData. \nAvailable columns are: , colnames(trainingData@data,collapse=, )), call. = FALSE) </span>
+
+
+<span style="color: #00ff00;">        if(!compareCRS(inputRaster, trainingData)) </span>
+<span style="color: #00ff00;">                stop(Projection of trainingData does not match inputRaster)</span>
+
+
+
+<span style="color: #00ff00;">        if(!gIntersects(as(extent(inputRaster),SpatialPolygons), as(extent(trainingData),SpatialPolygons))) </span>
+<span style="color: #00ff00;">                stop(inputRaster and trainingData do not overlap)</span>
+
+
+
+<span style="color: #00ff00;">        if(is.projected(trainingData)){</span>
+<span style="color: #00ff00;">                trainingData[[area]] &lt;- gArea(trainingData, byid = TRUE)</span>
+<span style="color: #00ff00;">        } else {</span>
+<span style="color: #00ff00;">                trainingData[[area]] &lt;- areaPolygon(trainingData)               </span>
+<span style="color: #00ff00;">        }</span>
+
+
+<span style="color: #00ff00;">        trainingData@data[[order]] &lt;- </span><span style="color: #daa520;">1</span><span style="color: #00ff00;">:nrow(trainingData)              </span>
+<span style="color: #00ff00;">        weights &lt;- ddply(trainingData@data, .variables = classAttributes, .fun = here(mutate), nSamplesClass = ceiling(nSamples * area / sum(area)))</span>
+<span style="color: #00ff00;">        trainingData@data &lt;- weights[order(weights$order),]</span>
+
+
+<span style="color: #00ff00;">        xy  &lt;- lapply(seq_along(trainingData), function(i_poly){        </span>
+<span style="color: #00ff00;">                                pts &lt;- spsample(trainingData[i_poly, ], type = random, n = trainingData@data[i_poly,nSamplesClass], iter = </span><span style="color: #daa520;">20</span><span style="color: #00ff00;">) </span>
+<span style="color: #00ff00;">                        })</span>
+<span style="color: #00ff00;">        xy &lt;- do.call(rbind, xy)</span>
+
+
+<span style="color: #00ff00;">        if(verbose) {</span>
+<span style="color: #00ff00;">                plot(inputRaster,</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">)</span>
+<span style="color: #00ff00;">                plot(trainingData, add = T)</span>
+<span style="color: #00ff00;">                points(xy, pch = </span><span style="color: #daa520;">3</span><span style="color: #00ff00;">, cex = </span><span style="color: #daa520;">0</span><span style="color: #00ff00;">.</span><span style="color: #daa520;">5</span><span style="color: #00ff00;">)</span>
+<span style="color: #00ff00;">        }       </span>
+
+
+<span style="color: #00ff00;">        if(verbose) print(Begin extract)</span>
+<span style="color: #00ff00;">        dataSet &lt;- data.frame(</span>
+<span style="color: #00ff00;">                        response = as.factor(over(x = xy, y = trainingData)[[classAttributes]]),</span>
+<span style="color: #00ff00;">                        extract(inputRaster, xy, cellnumbers = TRUE))</span>
+
+
+<span style="color: #00ff00;">        dataSet &lt;- dataSet[!duplicated(dataSet[,cells]),]</span>
+<span style="color: #00ff00;">        dataSet &lt;- dataSet[,colnames(dataSet) != cells]</span>
+
+
+<span style="color: #00ff00;">        classes &lt;- unique(trainingData[[classAttributes]])</span>
+<span style="color: #00ff00;">        classMapping &lt;- data.frame(classID = as.numeric(classes), class = levels(classes))</span>
+
+
+<span style="color: #00ff00;">        if(verbose) print(Starting to calculate random forest model) </span>
+<span style="color: #00ff00;">        model &lt;- randomForest(response ~ . , data = dataSet, na.action = na.omit, confusion = TRUE, ...)                </span>
+
+
+<span style="color: #00ff00;">        progress &lt;- none</span>
+<span style="color: #00ff00;">        if(verbose) { print(Starting spatial predict)</span>
+<span style="color: #00ff00;">                progress &lt;- text</span>
+<span style="color: #00ff00;">        }</span>
+
+
+<span style="color: #00ff00;">        ifelse(length(classes) &lt; </span><span style="color: #daa520;">255</span><span style="color: #00ff00;">, dataType &lt;- INT</span><span style="color: #daa520;">1</span><span style="color: #00ff00;">U,  dataType &lt;- INT</span><span style="color: #daa520;">2</span><span style="color: #00ff00;">U)</span>
+
+<span style="color: #00ff00;">        if(is.null(filename)){</span>
+<span style="color: #00ff00;">                spatPred &lt;- predict(inputRaster, model, progress = progress, dataType = dataType, overwrite = overwrite)</span>
+<span style="color: #00ff00;">        } else {</span>
+<span style="color: #00ff00;">                spatPred &lt;- predict(inputRaster, model, filename = filename, progress = progress, dataType = dataType, overwrite = overwrite)</span>
+<span style="color: #00ff00;">        }</span>
+
+
+<span style="color: #00ff00;">        if(verbose)</span>
+<span style="color: #00ff00;">                print(paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(rep(*,</span><span style="color: #daa520;">20</span><span style="color: #00ff00;">), collapse = ), Classification summary  ,paste</span><span style="color: #daa520;">0</span><span style="color: #00ff00;">(rep(*,</span><span style="color: #daa520;">20</span><span style="color: #00ff00;">), collapse = )))</span>
+
+
+<span style="color: #00ff00;">                print(model)</span>
+
+
+
+<span style="color: #00ff00;">        return(list(model = model, map = spatPred, classMapping = classMapping)) </span>
+
+<span style="color: #00ff00;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: tian</p>
+<p class="date">Created: 2014-09-15 Mon 16:35</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

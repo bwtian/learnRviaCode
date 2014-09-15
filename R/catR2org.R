@@ -9,7 +9,6 @@
 #' @author Bingwei Tian
 #' @example catR2org("landsat")
 catR2org  <- function(pkgRepo, pkgWD){
-                pkgRepo  <- "landsat"
                 pkgWD <- getwd()
                 pkgDir <- file.path(pkgWD,pkgRepo)
                 des1  <- readLines(file.path(pkgDir,"DESCRIPTION"))
@@ -28,7 +27,6 @@ catR2org  <- function(pkgRepo, pkgWD){
                 pkgAuthor  <- des[des[,1] == "Author",][,2]
                 pkgAuthor  <-gsub("(^ *)|( *$)", "", pkgAuthor)
                 pkgAuthor  <-gsub("\\s", "-", pkgAuthor)
-                pkgAuthor
                 orgName  <- paste0(pkgName, "_", pkgVer, "_(", pkgDate, "_by_",pkgAuthor,").org")
                 write.table(des3, orgName, sep = ":",  append = T,quote = F, row.names = F, col.names = F)
                 rPath  <- file.path(pkgDir, "/R")
@@ -42,4 +40,3 @@ catR2org  <- function(pkgRepo, pkgWD){
                 }
                 message("Wrap R code files to Emacs Org-mode babel file Finished")
 }
-

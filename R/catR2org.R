@@ -1,3 +1,14 @@
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#' @example catR2org("landsat")
 catR2org  <- function(pkgRepo, pkgWD){
                 pkgRepo  <- "landsat"
                 pkgWD <- getwd()
@@ -30,8 +41,6 @@ catR2org  <- function(pkgRepo, pkgWD){
                         ender  <- "#+END_SRC"
                         write.table(rbind(heading, header,rfile, ender), orgName, sep = "\n",  append = T,quote = F, row.names = F, col.names = F)
                 }
-
                 message("Wrap R code files to Emacs Org-mode babel file Finished")
 }
-setwd("~/Dropbox/7src/R/landsat/0_Landsat_R")
-catR2org("landsat")
+

@@ -1,13 +1,12 @@
-#'
-#'
-#'
-#'
-#'
-#'
-#'
-#'
-#'
-#'
+#' Wrap R source Codes to Emacs Org-mode Babel file
+#' @export
+#' @title Wrap R source Codes to Emacs Org-mode Babel file
+#' @name catR2org
+#' @param pkgRepo The folder normally with package name
+#' @param pkgWD   The folder hole the packages
+#' @details Wrap R source Codes in a package to Emacs Org-mode Babel file
+#' @return A .org file - the product of a and b
+#' @author Bingwei Tian
 #' @example catR2org("landsat")
 catR2org  <- function(pkgRepo, pkgWD){
                 pkgRepo  <- "landsat"

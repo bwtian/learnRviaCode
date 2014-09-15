@@ -1,0 +1,235 @@
++ Package: rLandsat8
++ Type: Package
++ Title: This package consumes Landsat 8
++ Version: ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
++ Date: 2014-04-22
++ Author: Terradue
++ Description: More about what it does (maybe more than one line)
++ License: Apache License, Version 2.0
++ Depends:
++     raster
+* dNBR.R
+#+BEGIN_SRC R 
+dNBR <- function(prefire, postfire, is.suncorrected = FALSE) {
+  dnbr <- ToNBR(prefire, is.suncorrected) - ToNBR(postfire, is.suncorrected)
+  return(dnbr)
+}
+#+END_SRC
+* DownloadLandsat.R
+#+BEGIN_SRC R 
+DownloadLandsat <- function(url, output.name) {
+  
+  
+  command.args <- paste0(-c cookies.txt -d 'username=, usgs.username, &password=, usgs.password,' https://earthexplorer.usgs.gov/login)
+  
+  
+  
+  ret <- system2(curl, command.args, stdout=TRUE, stderr=TRUE)
+  
+  command.args <- paste0(-b cookies.txt -L , url, -o , output.name)
+  ret <- system2(curl, command.args, stdout=TRUE, stderr=TRUE)
+  
+  file.remove(cookies.txt)
+  
+  return(ret)
+  
+}
+#+END_SRC
+* ReadLandsat8.R
+#+BEGIN_SRC R 
+ReadLandsat8 <- function(product) {  
+  raster.files <- list(aerosol=file_name_band_1,
+    blue=file_name_band_2, 
+    green=file_name_band_3,
+    red=file_name_band_4,
+    nir=file_name_band_5,
+    swir1=file_name_band_6,
+    swir2=file_name_band_7,
+    panchromatic=file_name_band_8,
+    cirrus=file_name_band_9,
+    tirs1=file_name_band_10,
+    tirs2=file_name_band_11
+    )
+  
+  meta.file <- paste0(product, /, product, _MTL.txt)
+  
+  if (!file.exists(meta.file))
+       stop(paste(meta.file, file not found.))
+  
+  textLines <- readLines(meta.file)
+  
+  counts <- count.fields(textConnection(textLines), sep==)
+  
+  met <- read.table(text=textLines[counts == 2], as.is=TRUE, header=FALSE, sep==, strip.white=TRUE, stringsAsFactors=FALSE)
+  
+  met <- read.table(text=textLines[counts == 2], as.is=TRUE, header=FALSE, sep==, strip.white=TRUE, stringsAsFactors=FALSE, row.names = NULL, col.names=c(name, value))
+  
+  met <- met[!met$name == GROUP, ] 
+  met <- met[!met$name == END_GROUP, ] 
+  rownames(met) <- tolower(met[, name])
+  met[, name] <- NULL
+  
+  met <- as.list(as.data.frame(t(met), stringsAsFactors=FALSE))
+  
+  bands=lapply(raster.files, function(x) {
+    r <- raster(paste0(product, /, met[[x]]))
+    r@title <- names(raster.files)[seq_along(raster.files)[sapply(raster.files, function(a) x %in% a)]]
+    NAvalue(r) <- 0
+    return(r)
+  }) 
+  
+  return(list(metadata=met,
+    band=bands) 
+  )
+}
+#+END_SRC
+* ToAtSatelliteBrightnessTemperature.R
+#+BEGIN_SRC R 
+ToAtSatelliteBrightnessTemperature <- function(landsat8, band) {
+  
+  bandnames <-c(aerosol, blue, green, red,
+  nir, swir1, swir2,
+  panchromatic,
+  cirrus,
+  tirs1, tirs2)
+  
+  allowedbands <- c(tirs1, tirs2)
+  
+  if (!band %in% allowedbands)
+  {
+       stop(paste(band, band not allowed))
+  }
+  
+  toarad <- ToTOARadiance(landsat8, band)
+  
+  idx <- seq_along(bandnames)[sapply(bandnames, function(x) band %in% x)]
+  k1 <- as.numeric(landsat8$metadata[[paste0(k1_constant_band_,idx)]])
+  k2 <- as.numeric(landsat8$metadata[[paste0(k2_constant_band_,idx)]])
+  bt <- k2 / log(k1 / toarad + 1) 
+  return(bt)
+}
+#+END_SRC
+* ToLSWI.R
+#+BEGIN_SRC R 
+ToLSWI <- function(landsat8, is.suncorrected = FALSE) {
+  
+  nir <- ToTOAReflectance(landsat8, nir, is.suncorrected)
+  swir1 <- ToTOAReflectance(landsat8, swir1, is.suncorrected)
+  
+  lswi <- (nir - swir1) / (nir + swir1)  
+  
+  return(lswi)
+}
+#+END_SRC
+* ToMNDWI.R
+#+BEGIN_SRC R 
+ToMNDWI <- function(landsat8, is.suncorrected = FALSE) {
+  
+  green <- ToTOAReflectance(landsat8, green, is.suncorrected)
+  swir1 <- ToTOAReflectance(landsat8, swir1, is.suncorrected)
+  
+  mndwi <- (green - swir1) / (green + swir1)
+  
+  return(mndwi)
+}
+#+END_SRC
+* ToNBR.R
+#+BEGIN_SRC R 
+ToNBR <- function(landsat8, is.suncorrected = FALSE) {
+  
+  nir <- ToTOAReflectance(landsat8, nir, is.suncorrected)
+  swir2 <- ToTOAReflectance(landsat8, swir2, is.suncorrected)
+  
+  nbr <- (nir - swir2) / (nir + swir2)
+  
+  return(nbr)
+}
+#+END_SRC
+* ToNBRClass.R
+#+BEGIN_SRC R 
+ToNBRClass <- function(prefire, postfire, is.suncorrected = FALSE) {
+  
+  m <- c(-Inf, -500, -1, -500, -251, 1, -251, -101, 2, -101, 99, 3, 99, 269, 
+    4, 269, 439, 5, 439, 659, 6, 659, 1300, 7, 1300, +Inf, -1)
+  class.mat <- matrix(m, ncol=3, byrow=TRUE)
+  reclass <- reclassify(10^3 * dNBR(prefire, postfire, is.suncorrected), class.mat)
+  
+  reclass <- ratify(reclass)
+  rat <- levels(reclass)[[1]]
+  rat$legend  <- c(NA, Enhanced Regrowth, High, Enhanced Regrowth, Low, Unburned, Low Severity, Moderate-low Severity, Moderate-high Severity, High Severity)
+  levels(reclass) <- rat
+  
+  return(reclass)
+}
+#+END_SRC
+* ToNDVI.R
+#+BEGIN_SRC R 
+ToNDVI <- function(landsat8, is.suncorrected = FALSE) {
+  
+  nir <- ToTOAReflectance(landsat8, nir, is.suncorrected)
+  red <- ToTOAReflectance(landsat8, red, is.suncorrected)
+  
+  ndvi <- (nir - red) / (nir + red)
+  
+  return(ndvi)
+}
+#+END_SRC
+* ToTOARadiance.R
+#+BEGIN_SRC R 
+ToTOARadiance <- function(landsat8, band) {
+  bandnames <-c(aerosol, blue, green, red,
+  nir, swir1, swir2,
+  panchromatic,
+  cirrus,
+  tirs1, tirs2)
+  
+  allowedbands <- bandnames
+  
+  if (!band %in% allowedbands)
+  {
+       stop(paste(band, band not allowed))
+  }
+  
+  idx <- seq_along(bandnames)[sapply(bandnames, function(x) band %in% x)]
+  ml <- as.numeric(landsat8$metadata[[paste0(radiance_mult_band_,idx)]])
+  al <- as.numeric(landsat8$metadata[[paste0(radiance_add_band_,idx)]])
+  
+  TOArad <- landsat8$band[[band]] * ml + al
+  
+  return(TOArad)
+  
+}
+#+END_SRC
+* ToTOAReflectance.R
+#+BEGIN_SRC R 
+ToTOAReflectance <- function(landsat8, band, is.suncorrected = FALSE) {
+  bandnames <-c(aerosol, blue, green, red,
+  nir, swir1, swir2,
+  panchromatic,
+  cirrus,
+  tirs1, tirs2)
+  
+  allowedbands <- c(aerosol, blue, green, red,
+  nir, swir1, swir2,
+  panchromatic,
+  cirrus)
+  
+  if (!band %in% allowedbands)
+  {
+       stop(paste(band, band not allowed))
+  }
+  
+  idx <- seq_along(bandnames)[sapply(bandnames, function(x) band %in% x)]
+  ml <- as.numeric(landsat8$metadata[[paste0(reflectance_mult_band_,idx)]])
+  al <- as.numeric(landsat8$metadata[[paste0(reflectance_add_band_,idx)]])
+  
+  
+  sun.correction.factor <- 1
+  if(is.suncorrected)
+       sun.correction.factor <- sin(as.numeric(landsat8$metadata$sun_elevation) * pi /180)
+  TOAref <- (landsat8$band[[band]] * ml + al)/sun.correction.factor
+  
+  return(TOAref)
+  
+}
+#+END_SRC

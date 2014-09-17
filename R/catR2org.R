@@ -36,7 +36,8 @@ catR2org  <- function(pkgRepo, pkgWD){
                         header  <- "#+BEGIN_SRC R "
                         rfile  <- read.table(file = file.path(rPath,i), sep = "\n")
                         ender  <- "#+END_SRC"
-                        write.table(rbind(heading, header,rfile, ender), orgName, sep = "\n",  append = T,quote = F, row.names = F, col.names = F)
+                        write.table(rbind(heading, header,rfile, ender), orgName, sep = "\n", 
+                                    append = T,quote = F, row.names = F, col.names = F)
                 }
                 message("Wrap R code files to Emacs Org-mode babel file Finished")
 }

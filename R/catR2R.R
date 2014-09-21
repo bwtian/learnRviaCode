@@ -1,10 +1,9 @@
-catR2R  <- function(dir, type = "R"){
-        dir  <- getwd()
+catR2R  <- function(dir = getwd(), type = "R"){
         # TODO , type =  c("R","Rnw","Rmd","org")
         #files  <- list.files(path = dir, patter = ".[rR]$", recursive = FALSE,)
         files  <- list.files(path = dir, recursive = T)
         now <- format(Sys.time(), "_%y%m%d_%H%M%S")
-        prefix  <- "00Merged"
+        prefix  <- "00_Rmerged"
         if (type == "R"){
                 fileName  <- paste( prefix, now, ".R", sep = "")
         }

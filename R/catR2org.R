@@ -32,7 +32,7 @@ catR2org  <- function(pkgRepo, pkgWD){
                 for (i in c(rFiles)){
                         heading <- paste0("* ", i)
                         header  <- " #+BEGIN_SRC R "
-                        rfile   <- read.table(file = file.path(rPath,i), sep = "\n", quote = "", comment.char = "")
+                        rfile   <- read.table(file = file.path(rPath,i), sep = "\n", quote = "'", comment.char = "")
                         ender   <- "  #+END_SRC"
                         write.table(rbind(heading, header,rfile, ender), orgName, sep = "\n",
                                     append = T,quote = F, row.names = F, col.names = F)

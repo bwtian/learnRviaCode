@@ -4,9 +4,9 @@
 #' @name catR2org
 #' @param pkgRepo The folder normally with package name
 #' @param pkgWD   The folder hole the packages
-#' @details Wrap R source Codes in a package to Emacs Org-mode Babel file
+#' @details key function to Wrap R source Codes in a package to Emacs Org-mode Babel file
 #' @return A .org file - the product of a and b
-#' @author Bingwei Tian
+#' @author Bingwei Tian <bwtian@gmail.com>
 #' @example catR2org("landsat")
 catR2org  <- function(pkgRepo, pkgWD){
                 pkgWD <- getwd()
@@ -16,7 +16,6 @@ catR2org  <- function(pkgRepo, pkgWD){
                                   replacement="\\1%\\2",
                                   x=des1)
                 des3  <- paste0("+ ", des1)
-                des3
                 des  <- as.data.frame(do.call(rbind,strsplit(des2, split = "%")))
                 pkgVer  <-des[des[,1] == "Version",][,2]
                 pkgVer  <-gsub("(^ *)|( *$)", "", pkgVer)
@@ -34,7 +33,7 @@ catR2org  <- function(pkgRepo, pkgWD){
                 for (i in c(rFiles)){
                         heading  <- paste0("* ", i)
                         header  <- "#+BEGIN_SRC R "
-                        rfile  <- read.table(file = file.path(rPath,i), sep = "\n")
+                        rfile  <- read.table(file = file.path(rPath,i), sep = "\n", comment.char = "")
                         ender  <- "#+END_SRC"
                         write.table(rbind(heading, header,rfile, ender), orgName, sep = "\n", 
                                     append = T,quote = F, row.names = F, col.names = F)

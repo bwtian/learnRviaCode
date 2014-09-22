@@ -1,4 +1,3 @@
-
 + Package: RStoolbox
 + Type: Package
 + Title: RStoolbox: A Collection of Remote Sensing Tools
@@ -20,29 +19,34 @@
 + License: GPL (>=3)
 + LazyData: true
 * cloudMask.R
-#+BEGIN_SRC R 
-# @param windowSize1 odd number, rectangular moving window to remove clouds which arre too small (likely artefacts)
-# @param windowSize2 odd number, rectangular buffer around cluster centers
-# @param sanitize logical. Should small clouds (possibly false positives) be removed by filtering? If \code{TRUE} windowSize1 must be specified.
-# @param maskGrowing logical. Applies simple region-growing (rectangular buffering) to the cloud mask. If \code{TRUE} windowSize2 must be specified.
-# @param lowBand bandname or number for the blue band
-# @param tirBand bandname or number for the thermal band
-# @param plot logical. Provides plots of the cloud mask for all sub-steps (sanitizing etc.) Helpful to find proper parametrization.
-# @param verbose logical. Print messages or supress.
-# @param returnDiffLayer logical. If \code{TRUE}, the difference layer will be returned along with the cloudmask. This option allows to re-use the difference layer in cloudMask.
-# @note Typically clouds are cold in the thermal region and have high reflectance in short wavelengths (blue). By differencing the two bands and thresholding a rough cloud mask can be obtained.
-# More sophisticated approaches can be found elsewhere, e.g. \link[https://code.google.com/p/fmask/]{fmask}.
-# 
-# It can make sense to find a suitable threshold on a cropped version of the scene. Also make sure you make use of the \code{returnDiffLayer} argument to save yourself one processing step.
-# Sanitizing and region growing can be seen as final polishing, i.e. as long as the pure cloud centers are not detected properly, you can turn those two arguments off if they take too long to calculate.
-# Once your mask detects obvious cloud pixels properly re-enable sanitizing and regionGrowing for fine tuning if desired. Finally, once a suitable threshold is established re-run cloudMask on the whole scene with this threshold and go get a coffee.
-# @export
-# @examples 
-# \dontrun{
-# ls <- stackMeta("path/to/MTL.txt")
-# ls_cor <- radCor(ls, path/to/MTL.txt) 
-# ls_cmask <-cloudMask(ls_cor, returnDiffLayer = TRUE)
-# }
+ #+BEGIN_SRC R 
+#' Very simple cloud detection for imagery with blue and thermal bands
+#' 
+#' @param x RasterBrick or RasterStack with reflectance and brightness temperature OR the mask of a previous run of \code{cloudMask} with \code{returnDiffLayer=TRUE}. 
+#' @param threshold cloud detection threshold. If not provided it will be guessed. Everything *above* this threshold will be considered a cloud pixel (unless it is removed by filtering afterwards).
+#' @param minCloudSize minimum number of cloud pixels in window1 
+#' @param windowSize1 odd number, rectangular moving window to remove clouds which arre too small (likely artefacts)
+#' @param windowSize2 odd number, rectangular buffer around cluster centers
+#' @param sanitize logical. Should small clouds (possibly false positives) be removed by filtering? If \code{TRUE} windowSize1 must be specified.
+#' @param maskGrowing logical. Applies simple region-growing (rectangular buffering) to the cloud mask. If \code{TRUE} windowSize2 must be specified.
+#' @param lowBand bandname or number for the blue band
+#' @param tirBand bandname or number for the thermal band
+#' @param plot logical. Provides plots of the cloud mask for all sub-steps (sanitizing etc.) Helpful to find proper parametrization.
+#' @param verbose logical. Print messages or supress.
+#' @param returnDiffLayer logical. If \code{TRUE}, the difference layer will be returned along with the cloudmask. This option allows to re-use the difference layer in cloudMask.
+#' @note Typically clouds are cold in the thermal region and have high reflectance in short wavelengths (blue). By differencing the two bands and thresholding a rough cloud mask can be obtained.
+#' More sophisticated approaches can be found elsewhere, e.g. \link[https://code.google.com/p/fmask/]{fmask}.
+#' 
+#' It can make sense to find a suitable threshold on a cropped version of the scene. Also make sure you make use of the \code{returnDiffLayer} argument to save yourself one processing step.
+#' Sanitizing and region growing can be seen as final polishing, i.e. as long as the pure cloud centers are not detected properly, you can turn those two arguments off if they take too long to calculate.
+#' Once your mask detects obvious cloud pixels properly re-enable sanitizing and regionGrowing for fine tuning if desired. Finally, once a suitable threshold is established re-run cloudMask on the whole scene with this threshold and go get a coffee.
+#' @export
+#' @examples 
+#' \dontrun{
+#' ls <- stackMeta(path/to/MTL.txt)
+#' ls_cor <- radCor(ls, path/to/MTL.txt) 
+#' ls_cmask <-cloudMask(ls_cor, returnDiffLayer = TRUE)
+#' }
 cloudMask <- function(x, threshold, minCloudSize, windowSize1 = 5, windowSize2 = 11, maskGrowing = TRUE, sanitize = TRUE, lowBand = B1, tirBand = B6, plot = TRUE, verbose = TRUE, returnDiffLayer = FALSE){
 	
 	## Set-up graphics device
@@ -116,22 +120,27 @@ cloudMask <- function(x, threshold, minCloudSize, windowSize1 = 5, windowSize2 =
 	if(returnDiffLayer) cmod <- stack(cmod, cdiff)
 	return(cmod)	
 }
-#+END_SRC
+  #+END_SRC
 * estimateSHV.R
-#+BEGIN_SRC R 
-# @param plot display histograms and haze values
-# @param returnTables return the frequency table per layer. Only takes effect if x is a Raster* object. If x is a result of estimateSHV tables will always be returned.
-# @export 
+ #+BEGIN_SRC R 
+#' Estimate image haze for dark object subtraction procedures
+#' 
+#' @param x raster object or a previous result from \code{estimateSHV(x , returnTables = TRUE} from which to estimate haze
+#' @param band character. Band or bandname from which to estimate SHV (optinal if x contains only one layer)
+#' @param darkProp proportion of pixels estimated to be dark
+#' @param plot display histograms and haze values
+#' @param returnTables return the frequency table per layer. Only takes effect if x is a Raster* object. If x is a result of estimateSHV tables will always be returned.
+#' @export 
 estimateSHV <- function(x, hazeBand, darkProp = 0.02, plot = FALSE, returnTables = TRUE) {
 	
 	## Initial or repeated run?
-	if(inherits(x, "Raster")) {
+	if(inherits(x, Raster)) {
 		preCalc <- FALSE
 	} else {
-		if(is.list(x) & "table" %in% names(x)) {
+		if(is.list(x) & table %in% names(x)) {
 			preCalc <- TRUE 
 		} else {
-			stop("x must be a Raster* object or the result of a previous run of estimateSHV(Raster*, ) with argument returnTables = TRUE", call. = FALSE)
+			stop(x must be a Raster* object or the result of a previous run of estimateSHV(Raster*, ) with argument 'returnTables = TRUE', call. = FALSE)
 		}	
 	}
 	
@@ -140,7 +149,7 @@ estimateSHV <- function(x, hazeBand, darkProp = 0.02, plot = FALSE, returnTables
 			if(nlayers(x) == 1) {
 				hazeBand <- names(x)        
 			} else {
-				stop("Please specify the band from which you want to estimate the haze dn")
+				stop(Please specify the band from which you want to estimate the haze dn)
 			}	
 			if(is.numeric(hazeBand)) hazeBand <- names(x)[hazeBand]
 		}
@@ -149,10 +158,10 @@ estimateSHV <- function(x, hazeBand, darkProp = 0.02, plot = FALSE, returnTables
 		
 		if(is.numeric(hazeBand)) hazeBand <- names(x$table)[hazeBand]
 		preCalcAvail <- hazeBand %in% names(x$table)
-		if(!any(preCalcAvail)) 	stop("Cannot estimate SHV because tables are missing for all specified bands", call. = FALSE)
+		if(!any(preCalcAvail)) 	stop(Cannot estimate SHV because tables are missing for all specified bands, call. = FALSE)
 		
 		if(any(!preCalcAvail)) {
-			warning(paste0("Cannot estimate SHV for >> ", hazeBand[!preCalcAvail], " << because tables are missing."), call. = FALSE)
+			warning(paste0(Cannot estimate SHV for >> , hazeBand[!preCalcAvail],  << because tables are missing.), call. = FALSE)
 			hazeBand <- hazeBand[preCalcAvail] 				
 		}	
 	}
@@ -162,14 +171,14 @@ estimateSHV <- function(x, hazeBand, darkProp = 0.02, plot = FALSE, returnTables
 	
 	## Run estimation for each band separately
 	out   <- lapply(hazeBand, function(bi) {
-				if(inherits(x, "Raster")) {
-					tf <- freq(x[[bi]], useNA = "no") 
+				if(inherits(x, Raster)) {
+					tf <- freq(x[[bi]], useNA = no) 
 				} else {
-					if(is.list(x) & "table" %in% names(x)) {
+					if(is.list(x) & table %in% names(x)) {
 						preCalc <- TRUE
 						tf <- x$table[[bi]]
 					} else {
-						stop("x must be a Raster* object or the result of a previous run of estimateSHV() with argument returnTables = TRUE", call. = FALSE)
+						stop(x must be a Raster* object or the result of a previous run of estimateSHV() with argument 'returnTables = TRUE', call. = FALSE)
 					}
 				}
 				tf <- tf[tf[,1] > 0,]
@@ -177,102 +186,108 @@ estimateSHV <- function(x, hazeBand, darkProp = 0.02, plot = FALSE, returnTables
 				dtf <- c(diff(tf[,2]),0) / c(diff(tf[,1]),0)
 				
 				SHV <- tf[which(dtf > darkProp)[1], 1] 
-				if(is.na(SHV)) warning(paste("darkProp for band", bi, "was chosen too high. It exceeds the value range."), call. = FALSE)
+				if(is.na(SHV)) warning(paste(darkProp for band, bi, was chosen too high. It exceeds the value range.), call. = FALSE)
 				
 				if(plot){
 					if(multiple) x11()
 					par(mfrow = c(1,2))
 					
-					plot(tf, xlab = "DN", ylab = "Frequency", type = "l", main = bi)
-					abline(v = tf[tf[,1]==SHV,1], col="red")
-					text(SHV, max(tf[,2]), pos=4, label = paste0("SHV_DN = ", SHV), col ="red")
+					plot(tf, xlab = DN, ylab = Frequency, type = l, main = bi)
+					abline(v = tf[tf[,1]==SHV,1], col=red)
+					text(SHV, max(tf[,2]), pos=4, label = paste0(SHV_DN = , SHV), col =red)
 					
-					plot(dtf, type="l", xlab = "DN", ylab = "diff(Frequency)", main = bi)
-					abline(v = tf[tf[,1]==SHV,1], col="red")
-					abline(h = darkProp, col = "#00000070", lty = 2)
-					text(max(tf[,1]), darkProp, label = paste0("darkProp = ", darkProp), col = "#00000070")
-					text(SHV, max(dtf, na.rm = TRUE), pos=4, label = paste0("SHV_DN = ", SHV), col ="red")
+					plot(dtf, type=l, xlab = DN, ylab = diff(Frequency), main = bi)
+					abline(v = tf[tf[,1]==SHV,1], col=red)
+					abline(h = darkProp, col = #00000070, lty = 2)
+					text(max(tf[,1]), darkProp, label = paste0(darkProp = , darkProp), col = #00000070)
+					text(SHV, max(dtf, na.rm = TRUE), pos=4, label = paste0(SHV_DN = , SHV), col =red)
 					
 				}
 				
 				return(list(table = tf, SHV = SHV))
 			})
 	
-	SHV <- unlist(sapply(out, "[", 2))
+	SHV <- unlist(sapply(out, [, 2))
 	names(SHV) <- hazeBand
 	
 	if(!preCalc){
-		table <- sapply(out, "[", 1)
+		table <- sapply(out, [, 1)
 		names(table) <- hazeBand
 	} else {
 		table <- x$table
 	}
 	return( if(!returnTables) SHV else list(SHV=SHV, table = table))
 }
-#+END_SRC
+  #+END_SRC
 * internalFunctions.R
-#+BEGIN_SRC R 
-# @keywords internal
+ #+BEGIN_SRC R 
+#' Estimates Earth-Sun distance (in AU) for a given date 
+#' 
+#' Function taken from the landsat package: S. Goslee (2012)
+#' 
+#' @param adate character. date in format YYYY-MM-DD
+#' @keywords internal
 .ESdist <- function(adate){	
-	edist <- julian(as.Date(adate), origin=as.Date(paste(substring(adate, 1, 4), "12", "31", sep="-")))[[1]]
+	edist <- julian(as.Date(adate), origin=as.Date(paste(substring(adate, 1, 4), 12, 31, sep=-)))[[1]]
 	 1 - 0.016729 * cos((2*pi) * (0.9856 * (edist - 4)/360))
 }
-
-
-# Extract numbers from strings
-# 
-# @param x string or vector of strings
-# @param returnNumeric logical. should results be formatted \code{as.numeric}? If so, "05" will be converted to 5. Set returnNumeric to \code{FALSE} to keep preceeding zeros.
-# @note decimal numbers will be returned as two separate numbers
-# @keywords internal
+#' Extract numbers from strings
+#' 
+#' @param x string or vector of strings
+#' @param returnNumeric logical. should results be formatted \code{as.numeric}? If so, 05 will be converted to 5. Set returnNumeric to \code{FALSE} to keep preceeding zeros.
+#' @note decimal numbers will be returned as two separate numbers
+#' @keywords internal
 .getNumeric <- function(x, returnNumeric = TRUE) {
 	sapply(x, function(xi){
-				d <- strsplit(xi, "[^[:digit:]]")[[1]]
-				d <- if(returnNumeric) as.numeric(d[d!=""]) else d[d!=""]
+				d <- strsplit(xi, [^[:digit:]])[[1]]
+				d <- if(returnNumeric) as.numeric(d[d!=]) else d[d!=]
 				d
 			})
 }
-
-
-#+END_SRC
+  #+END_SRC
 * radCor.R
-#+BEGIN_SRC R 
-# @param x raster object
-# @param metaData either the result of \code{readMeta} or a path to the meta data (MCL) file. 
-# @param reflectance logical. If \code{TRUE} output will be reflectance, if \code{FALSE} it will be radiance
-# @param thermal logical. If \code{TRUE} thermal bands will be converted to brightness temperature (Kelvin).
-# @param bandSet numeric or character. original Landsat band numbers or names in the form of ("B1", "B2" etc). If set to full all bands in the solar region will be processed.
-# @param gain Band-specific sensor gain. Require either gain and offset or Grescale and Brescale to convert DN to radiance.
-# @param offset Band-specific sensor offset. Require either gain and offset or Grescale and Brescale to convert DN to radiance.
-# @param Grescale Band-specific sensor Grescale (gain). Require either gain and offset or Grescale and Brescale to convert DN to radiance.
-# @param Brescale Band-specific sensor Brescale (bias). Require either gain and offset or Grescale and Brescale to convert DN to radiance.
-# @param sunElev Sun elevation in degrees
-# @param satZenith sensor zenith angle (0 for Landsat)
-# @param d Earth-Sun distance in AU.
-# @param esun Mean exo-atmospheric solar irradiance, as given by Chandler et al. 2009 or others.
-# @param SHV starting haze value, can be estimated using estimateSHV(). if not provided and method is DOS or COSTZ SHV will be estimated in an automated fashion. Not needed for apparent reflectance.
-# @param hazeBand band from which SHV was estimated.
-# @param method Radiometric correction method to be used. There are currently four methods available (see Details):
-#  "APREF", "DOS" (Chavez 1989), "COSTZ" (Chavez 1996), SDOS.
-# @note This was originally a fork of randcorr in the landsat package. It may be slower, however it works on Raster* objects and hence is memory-safe.
-# @details  \describe{
-# \item{APREF}{Apparent reflectance}
-# \item{DOS}{Dark object subtratction following Chavez (1989)}
-# \item{COSTZ}{Dark object subtraction following Chaves(1996)}
-# \item{SDOS}{Simple dark object subtraction. Classical DOS, Lhaze must be estimated for each band separately.}
-# }
-# @references S. Goslee (2011): Analyzing Remote Sensing Data in R: The landsat Package. Journal of Statistical Software 43(4).
-# @export
-# @seealso \link[landsat]{radiocorr} 
-radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, bandSet = "full", gain, offset, G_rescale, B_rescale,
-		sunElev, satZenith = 0, d, esun, date, SHV, hazeBand, atHaze,  method = "APREF"){
+ #+BEGIN_SRC R 
+#' Radiometric calibration and correction
+#' 
+#' Implements several different methods for absolute radiometric correction of Landsat data.
+#' You can either specify a metadata file, or supply all neccesary values manually. With proper parametrization APREF and SDOS should work for other sensors as well.
+#' 
+#' @param x raster object
+#' @param metaData either the result of \code{readMeta} or a path to the meta data (MCL) file. 
+#' @param reflectance logical. If \code{TRUE} output will be reflectance, if \code{FALSE} it will be radiance
+#' @param thermal logical. If \code{TRUE} thermal bands will be converted to brightness temperature (Kelvin).
+#' @param bandSet numeric or character. original Landsat band numbers or names in the form of (B1, B2 etc). If set to 'full' all bands in the solar region will be processed.
+#' @param gain Band-specific sensor gain. Require either gain and offset or Grescale and Brescale to convert DN to radiance.
+#' @param offset Band-specific sensor offset. Require either gain and offset or Grescale and Brescale to convert DN to radiance.
+#' @param Grescale Band-specific sensor Grescale (gain). Require either gain and offset or Grescale and Brescale to convert DN to radiance.
+#' @param Brescale Band-specific sensor Brescale (bias). Require either gain and offset or Grescale and Brescale to convert DN to radiance.
+#' @param sunElev Sun elevation in degrees
+#' @param satZenith sensor zenith angle (0 for Landsat)
+#' @param d Earth-Sun distance in AU.
+#' @param esun Mean exo-atmospheric solar irradiance, as given by Chandler et al. 2009 or others.
+#' @param SHV starting haze value, can be estimated using estimateSHV(). if not provided and method is DOS or COSTZ SHV will be estimated in an automated fashion. Not needed for apparent reflectance.
+#' @param hazeBand band from which SHV was estimated.
+#' @param method Radiometric correction method to be used. There are currently four methods available (see Details):
+#'  APREF, DOS (Chavez 1989), COSTZ (Chavez 1996), SDOS.
+#' @note This was originally a fork of randcorr in the landsat package. It may be slower, however it works on Raster* objects and hence is memory-safe.
+#' @details  \describe{
+#' \item{APREF}{Apparent reflectance}
+#' \item{DOS}{Dark object subtratction following Chavez (1989)}
+#' \item{COSTZ}{Dark object subtraction following Chaves(1996)}
+#' \item{SDOS}{Simple dark object subtraction. Classical DOS, Lhaze must be estimated for each band separately.}
+#' }
+#' @references S. Goslee (2011): Analyzing Remote Sensing Data in R: The landsat Package. Journal of Statistical Software 43(4).
+#' @export
+#' @seealso \link[landsat]{radiocorr} 
+radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, bandSet = full, gain, offset, G_rescale, B_rescale,
+		sunElev, satZenith = 0, d, esun, date, SHV, hazeBand, atHaze,  method = APREF){
 	# http://landsat.usgs.gov/Landsat8_Using_Product.php
 	
-	if(!method %in% c("APREF", "DOS", "COSTZ", "SDOS")) stop("method must be one of APREF, DOS, COSTZ SDOS", call.=FALSE)
+	if(!method %in% c(APREF, DOS, COSTZ, SDOS)) stop(method must be one of 'APREF', 'DOS', 'COSTZ' 'SDOS', call.=FALSE)
 	
-	if(!reflectance & method != "APREF"){
-		warning("For radiance calculations the method argument is ignored")
-		method <- "APREF"
+	if(!reflectance & method != APREF){
+		warning(For radiance calculations the 'method' argument is ignored)
+		method <- APREF
 	}
 	
 	if(!missing(metaData)) {
@@ -297,7 +312,7 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 		###
 		if(missing(G_rescale) | missing(B_rescale)){
 			if(missing(offset) | missing(gain)) {
-				stop("Please specify either a) metaData, b) gain and offset, c) B_rescale and G_rescale", call. = FALSE )
+				stop(Please specify either a) metaData, b) gain and offset, c) B_rescale and G_rescale, call. = FALSE )
 			} else {
 				B_rescale <- 1/gain
 				G_rescale <- -offset/gain
@@ -307,16 +322,16 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 		
 		if(missing(d)) {
 			if(missing(date)) { 
-				stop("Please specify either a) edist or b)date", call. = FALSE) 
+				stop(Please specify either a) edist or b)date, call. = FALSE) 
 			} else {
 				d <- .ESdist(date) 
 			}
 		}
 	}
 	
-	if(satellite == "LANDSAT8" & method != "APREF") {
-		warning("DOS, COSTZ and SDOS are currently not implemented for Landsat 8. Using official reflectance calibration coefficients, i.e. output corresponds to method = APREF", call. = FALSE) 
-		method <- "APREF"
+	if(satellite == LANDSAT8 & method != APREF) {
+		warning(DOS, COSTZ and SDOS are currently not implemented for Landsat 8. Using official reflectance calibration coefficients, i.e. output corresponds to method = 'APREF', call. = FALSE) 
+		method <- APREF
 	}
 	
 	satZenith	<- satZenith * pi / 180
@@ -328,22 +343,22 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 	
 	## We use .getNumeric to deal with band name appendices (e.g. LS7 can have to versions of band 6: B6_VCID_1 and B6_VCID_2
 	## which would not match the database name B6
-	sDB 	<- sDB[match(paste0("B", sapply(.getNumeric(names(x)),"[",1)), sDB$band),]	
-	sDB		<- sDB[match(sDB$band, paste0("B",sapply(.getNumeric(names(x)),"[",1))),]
+	sDB 	<- sDB[match(paste0(B, sapply(.getNumeric(names(x)),[,1)), sDB$band),]	
+	sDB		<- sDB[match(sDB$band, paste0(B,sapply(.getNumeric(names(x)),[,1))),]
 	
-	if(any(bandSet == "full")) {
+	if(any(bandSet == full)) {
 		bandSet <- names(x)
 	} else {
-		if(is.numeric(bandSet)) bandSet <- paste0("B", bandSet)
+		if(is.numeric(bandSet)) bandSet <- paste0(B, bandSet)
 	}	
 	
 	if(missing(metaData))	names(B_rescale) <- names(G_rescale) <- bandSet
 	
 	origBands 	<- names(x)   
-	corBands 	<- sDB[!sDB$bandtype %in% c("TIR", "PAN"), "band"]
+	corBands 	<- sDB[!sDB$bandtype %in% c(TIR, PAN), band]
 	bandSet 	<- bandSet[bandSet %in% corBands]
 	if(thermal){
-		tirBands	<- if(satellite=="LANDSAT8") c("B10", "B11") else c("B6", "B6_VCID_1", "B6_VCID_2")	
+		tirBands	<- if(satellite==LANDSAT8) c(B10, B11) else c(B6, B6_VCID_1, B6_VCID_2)	
 		tirBands 	<- origBands[origBands %in% tirBands]
 	} else {
 		tirBands <- NULL
@@ -357,23 +372,23 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 	}
 	
 	if(missing(esun)) {
-		esun <- sDB[,"esun"] 
+		esun <- sDB[,esun] 
 		names(esun) <- sDB$band
 	}
 	xref <- x[[bandSet]]
 	
 	if(reflectance) {
-		message("Bands to convert to reflectance: ", paste(bandSet, collapse = ", "))
-		if(length(tirBands) > 0 & thermal) message("Thermal bands to convert to brightness temperatures: ", paste(tirBands, collapse=", "))
-		if(length(exclBands) > 0) message("Excluding bands: ", paste(exclBands, collapse = ", "))	
+		message(Bands to convert to reflectance: , paste(bandSet, collapse = , ))
+		if(length(tirBands) > 0 & thermal) message(Thermal bands to convert to brightness temperatures: , paste(tirBands, collapse=, ))
+		if(length(exclBands) > 0) message(Excluding bands: , paste(exclBands, collapse = , ))	
 	} else {
 		bandSet <- c(bandSet, tirBands)
-		message("Bands to convert to toa radiance: ", paste(bandSet, collapse = ", "))
+		message(Bands to convert to toa radiance: , paste(bandSet, collapse = , ))
 	}
 	
 	## Thermal processing
 	if(thermal & reflectance & length(tirBands) > 0) {
-		message("Processing thermal band(s)")
+		message(Processing thermal band(s))
 		## Convert to radiance
 		L <- G_rescale[tirBands] * x[[tirBands]] + B_rescale[tirBands]
 		## Convert to temperature
@@ -383,10 +398,10 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 		xtir <- NULL
 	}
 	
-	message("Processing radiance / reflectance")
+	message(Processing radiance / reflectance)
 	
 	## Radiance and reflectance processing
-	if(method == "APREF") {
+	if(method == APREF) {
 		TAUz <- 1
 		TAUv <- 1
 		Edown <- 0
@@ -396,11 +411,11 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 		
 		## Estimate SHV automatically
 		if(missing(SHV)){
-			if(missing(hazeBand))  hazeBand <- "B1"
+			if(missing(hazeBand))  hazeBand <- B1
 			if(length(hazeBand) > 1) {
-				warning("Automatic search for SHV values is intended for one band only. For more bands please estimate hzae DNs manually using estimateSHV() \nhazeBand was automatically reset to 1")
+				warning(Automatic search for SHV values is intended for one band only. For more bands please estimate hzae DNs manually using estimateSHV() \nhazeBand was automatically reset to 1)
 				hazeBand <- 1 }
-			message("SHV was not provided -> Estimating SHV automatically")
+			message(SHV was not provided -> Estimating SHV automatically)
 			dP <- 0.02
 			## We suppress warnings because we search for a possible value autimatically in case we missed the first time
 			SHV <- suppressWarnings(estimateSHV(x, hazeBand = hazeBand, darkProp = dP , plot = FALSE, returnTables = TRUE))
@@ -408,17 +423,17 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 				dP	<- dP * 0.9
 				SHV <- suppressWarnings(estimateSHV(SHV, hazeBand = hazeBand, darkProp = dP, plot = FALSE, returnTables = TRUE))
 			}
-			message(paste0("SHV estimated as: ", SHV[[1]]))
+			message(paste0(SHV estimated as: , SHV[[1]]))
 			SHV <- SHV[[1]]
 		}
 		
 		
 		# For SDOS gain, offset, Lhaze and Esun must be provided as coresponding vectors of equal length
-		if(method == "SDOS") hazeBand <- bandSet 
+		if(method == SDOS) hazeBand <- bandSet 
 		TAUz <- 1
 		TAUv <- 1
 		Edown <- 0				
-		if (method == "COSTZ") {
+		if (method == COSTZ) {
 			TAUz <- suntheta
 			TAUv <- satphi
 		}  
@@ -427,14 +442,14 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 		Ldo <- 0.01 * ((esun[hazeBand] * suntheta * TAUz) + Edown) * TAUv / (pi * d ^ 2)
 		Lhaze <- (SHV * G_rescale[hazeBand] + B_rescale[hazeBand]) - Ldo
 		
-		if(method %in% c("DOS", "COSTZ")) {		
+		if(method %in% c(DOS, COSTZ)) {		
 			## Pick atmoshpere type
 			if(missing(atHaze)) {
 				atHaze.db <- data.frame(min = c(1,56,76,96,116), max = c(55,75,95,115,255)) / 255 * (2^rad-1)
-				atHaze <- c("veryClear", "clear", "moderate", "hazy", "veryHazy")[Lhaze > atHaze.db[,1] & Lhaze <= atHaze.db[,2]]
-				message("Selcting atmosphere: , atHaze, ")
+				atHaze <- c(veryClear, clear, moderate, hazy, veryHazy)[Lhaze > atHaze.db[,1] & Lhaze <= atHaze.db[,2]]
+				message(Selcting atmosphere: ', atHaze, ')
 			}		
-			Lhaze	  <- Lhaze  * sDB[match(bandSet,sDB$band), paste0(hazeBand,"_", atHaze)]
+			Lhaze	  <- Lhaze  * sDB[match(bandSet,sDB$band), paste0(hazeBand,_, atHaze)]
 			
 			## Calculate corrected RAD_haze
 			NORM  <- G_rescale[bandSet] / G_rescale[hazeBand]
@@ -448,7 +463,7 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 	G_rescale 	<- G_rescale[bandSet]
 	esun <- esun[bandSet]
 	
-	if(satellite != "LANDSAT8"){
+	if(satellite != LANDSAT8){
 		
 		if(!reflectance) {
 			## TOA Radiance
@@ -480,11 +495,9 @@ radCor <-	function(x, metaData, reflectance = TRUE, thermal = TRUE, satellite, b
 	
 	return(x)
 }
-
-
-# Landsat auxilliary data. Taken from Chander et al 2009
-# spatRes resampling: http://landsat.usgs.gov/band_designations_landsat_satellites.php
-# @keywords internal
+#' Landsat auxilliary data. Taken from Chander et al 2009
+#' spatRes resampling: http://landsat.usgs.gov/band_designations_landsat_satellites.php
+#' @keywords internal
 LANDSAT.db <- list(
 		LANDSAT5 = list (
 				TM = data.frame(band = paste0(B, 1:7),
@@ -524,37 +537,34 @@ for(s in names(LANDSAT.db)){
 	rownames(TAB1)  <- bands
 	colnames(TAB1)	<- c(veryClear, clear, moderate, hazy, veryHazy)
 	
-	## Calc Chavez Tab 2, but only until SHVB = B4, larger wavelengths dont make sense to estimate haze
-	TAB2 <- lapply(paste0("B", 1:4), function(SHVB){ sweep(TAB1, 2, TAB1[SHVB,], "/")})
-	TAB2 <- do.call("cbind", TAB2)
-	colnames(TAB2) <- paste0(rep(paste0("B", 1:4), each = 5),"_", colnames(TAB2))
+	## Calc Chavez Tab 2, but only until SHVB = B4, larger wavelengths don't make sense to estimate haze
+	TAB2 <- lapply(paste0(B, 1:4), function(SHVB){ sweep(TAB1, 2, TAB1[SHVB,], /)})
+	TAB2 <- do.call(cbind, TAB2)
+	colnames(TAB2) <- paste0(rep(paste0(B, 1:4), each = 5),_, colnames(TAB2))
 	
-	LANDSAT.db[[s]][[1]] <-  merge(LANDSAT.db[[s]][[1]] , TAB2, by.x = "band", by.y = "row.names", all.x = TRUE, sort = FALSE)
+	LANDSAT.db[[s]][[1]] <-  merge(LANDSAT.db[[s]][[1]] , TAB2, by.x = band, by.y = row.names, all.x = TRUE, sort = FALSE)
 }
-
-
-
-
-
-
-
-
-#+END_SRC
+  #+END_SRC
 * readMeta.R
-#+BEGIN_SRC R 
-# @param unifiedMetadata logical. If \code{TRUE} some relevant etadata of Landsat 5:8 are homogenized into a standard format and appended to the original metadata.
-# @return Returns a list containing the Metadata of the MTL file, structured by the original grouping.
-# 
-# @import landsat
-# @export 
-# 
-# 
-# 
+ #+BEGIN_SRC R 
+#' Read landsat MTL metadata files
+#' 
+#' Besides reading metadata, readMeta deals with legacy versions of Landsat metadata files and where possible adds missing information (radiometric gain and offset, earth-sun distance).
+#' 
+#' @param file path to Landsat MTL file (...MTL.txt)
+#' @param unifiedMetadata logical. If \code{TRUE} some relevant etadata of Landsat 5:8 are homogenized into a standard format and appended to the original metadata.
+#' @return Returns a list containing the Metadata of the MTL file, structured by the original grouping.
+#' 
+#' @import landsat
+#' @export 
+#' 
+#' 
+#' 
 readMeta <- function(file, unifiedMetadata = TRUE){
 	if(!grepl(MTL, file) & !grepl(xml, file)) warning(The Landsat metadata file you have specified looks unusual. Typically the filename contains the string 'MTL' or 'xml'. Are you sure you specified the right file? \n I'll try to read it but check the results!)
 	
 	## Read mtl file
-	metaDataFormat <- if(grepl(xml, file)) XML else MTL
+	metaDataFormat <- if(grepl('xml', file)) XML else MTL
 	
 	if(metaDataFormat == MTL) {
 		## PROCESS LPS MTL FILES
@@ -732,24 +742,24 @@ readMeta <- function(file, unifiedMetadata = TRUE){
 	}
 	return(meta)
 }
-# Import separate Landsat files into single stack
-# 
-# Reads Landsat MTL or XML metadata files and loads single Landsat Tiffs into a rasterStack.
-# Be aware that by default stackLS() does NOT import panchromatic bands nor thermal bands with resolutions != 30m.
-# 
-# @param file character. Path to Landsat MTL metadata file.
-# @param allResolutions logical. if \code{TRUE} a list will be returned with length = unique spatial resolutions.
-# @param resampleTIR logical. As of  the USGS resamples TIR bands to 30m. Use this option if you use data processed prior to February 25, 2010 which has not been resampled.
-# @param resamplingMethod character. Method to use for TUR resampling (ngb or bilinear). Defaults to ngb (nearest neighbor).
-# @param products character vector. Which products should be returned in the stack? (only relevant for LS8 and LEDAPS processed products). image: image data, index: multiband indices, qa quality flag bands. 
-# @return Either a list of rasterStacks comprising all resolutions or only one rasterStack comprising only 30m resolution imagery
-# @note 
-# Be aware that by default stackLS() does NOT import panchromatic bands nor thermal bands with resolutions != 30m. Use the allResolutions argument to import all layers.
-# 
-# The USGS uses cubic convolution to resample TIR bands to 30m resolution. In the opinion of the author this may not be the best choice for supersampling. 
-# Therefore the default method in this implementation is nearest neighbor. Keep this in mind if you plan to compare TIR bands created by differing resampling routines.
-# Typically, however, you will already have the USGS 30m TIR products, so no need to worry...
-# @export
+#' Import separate Landsat files into single stack
+#' 
+#' Reads Landsat MTL or XML metadata files and loads single Landsat Tiffs into a rasterStack.
+#' Be aware that by default stackLS() does NOT import panchromatic bands nor thermal bands with resolutions != 30m.
+#' 
+#' @param file character. Path to Landsat MTL metadata file.
+#' @param allResolutions logical. if \code{TRUE} a list will be returned with length = unique spatial resolutions.
+#' @param resampleTIR logical. As of  the USGS resamples TIR bands to 30m. Use this option if you use data processed prior to February 25, 2010 which has not been resampled.
+#' @param resamplingMethod character. Method to use for TUR resampling ('ngb' or 'bilinear'). Defaults to 'ngb' (nearest neighbor).
+#' @param products character vector. Which products should be returned in the stack? (only relevant for LS8 and LEDAPS processed products). 'image': image data, 'index': multiband indices, 'qa' quality flag bands. 
+#' @return Either a list of rasterStacks comprising all resolutions or only one rasterStack comprising only 30m resolution imagery
+#' @note 
+#' Be aware that by default stackLS() does NOT import panchromatic bands nor thermal bands with resolutions != 30m. Use the allResolutions argument to import all layers.
+#' 
+#' The USGS uses cubic convolution to resample TIR bands to 30m resolution. In the opinion of the author this may not be the best choice for supersampling. 
+#' Therefore the default method in this implementation is nearest neighbor. Keep this in mind if you plan to compare TIR bands created by differing resampling routines.
+#' Typically, however, you will already have the USGS 30m TIR products, so no need to worry...
+#' @export
 stackMeta <- function(file, allResolutions = FALSE,  resampleTIR = FALSE, resamplingMethod = ngb, products = c(image, index, qa)){
 	
 	## Read metadata and extract layer file names
@@ -789,27 +799,37 @@ stackMeta <- function(file, allResolutions = FALSE,  resampleTIR = FALSE, resamp
 	
 	return(LS)
 }
-#+END_SRC
+  #+END_SRC
 * RStoolbox.R
-#+BEGIN_SRC R 
+ #+BEGIN_SRC R 
+#' RStoolbox: A Collection of Remote Sensing Tools
+#'
+#' @name RStoolbox
+#' @import raster rgeos geosphere plyr randomForest stringr
+#' @docType package
 NULL
-#+END_SRC
+  #+END_SRC
 * spectralIndices.R
-#+BEGIN_SRC R 
-# @param bands list of band designations. See notes for details
-# @param maskRaster Raster layer containing a binary mask to exclude areas from prediction.
-# @param verbose logical. prints progress, statistics and graphics during execution
-# @param ... further arguments such as filename etc. passed to \link[raster]{writeRaster}
-# @return rasterBrick or rasterStack
-# @seealso \code{\link[raster]{overlay}} 
-# @export
-# @examples
-# r <- raster(ncol=10,nrow=10)
-# r[] <- sample(1:155, 100, TRUE)
-# r <- stack(r, r + 90 + rnorm(100, 10)) 
-# names(r) <- c(red, nir)
-# SI <- spectralIndices(r, indices = c("SR", "NDVI"), bands = list(NIR = "nir", RED = "red"))
-# plot(SI)
+ #+BEGIN_SRC R 
+#' Spectral indices
+#' 
+#' @param inputRaster Raster* object. Typically remote sensing imagery, which is to be classified.
+#' @param indices character. one or more spectral indices 
+#' @param sensor if a sensor is specified \code{bands} is populated automatically. Specifying a sensor requires the layernames in inputRaster to match the official band designations formatted as B1, B2 etc.
+#' @param bands list of band designations. See notes for details
+#' @param maskRaster Raster layer containing a binary mask to exclude areas from prediction.
+#' @param verbose logical. prints progress, statistics and graphics during execution
+#' @param ... further arguments such as filename etc. passed to \link[raster]{writeRaster}
+#' @return rasterBrick or rasterStack
+#' @seealso \code{\link[raster]{overlay}} 
+#' @export
+#' @examples
+#' r <- raster(ncol=10,nrow=10)
+#' r[] <- sample(1:155, 100, TRUE)
+#' r <- stack(r, r + 90 + rnorm(100, 10)) 
+#' names(r) <- c(red, nir)
+#' SI <- spectralIndices(r, indices = c(SR, NDVI), bands = list(NIR = nir, RED = red))
+#' plot(SI)
 spectralIndices <- function(inputRaster, indices = NDVI, sensor, bands , maskRaster = NULL, verbose = FALSE, ... ) {
 	# TODO: add indices
 	# TODO: add examples
@@ -871,18 +891,23 @@ spectralIndices <- function(inputRaster, indices = NDVI, sensor, bands , maskRas
 	names(outStack) <- indices	 
 	return(outStack)
 }
-#+END_SRC
+  #+END_SRC
 * superClass.R
-#+BEGIN_SRC R 
-# @param nSamples number of samples per land cover class
-# @param filename path to output file (optional). If \code{NULL}, standard raster handling will apply, i.e. storage either in memory or in the raster temp directory.
-# @param maskRaster Raster layer containing a binary mask to exclude areas from prediction.
-# @param verbose logical. prints progress, statistics and graphics during execution
-# @param predict logical. \code{TRUE} (default) will return a classified map, \code{FALSE} will only train the classifier
-# @param ... further arguments to be passed to randomForest
-# @return A list containing [[1]] the model, [[2]] the predicted raster and [[3]] the class mapping  
-# @seealso \code{\link{randomForest}} 
-# @export
+ #+BEGIN_SRC R 
+#' Supervised Classification
+#' 
+#' @param inputRaster Raster* object. Typically remote sensing imagery, which is to be classified.
+#' @param trainingData SpatialPolygonsDataFrame containing the training data used to train the classifier.  
+#' @param classAttributes character giving the column in \code{trainingData}, which contains the class attribute. Can be omitted, when \code{trainingData} has only one column.
+#' @param nSamples number of samples per land cover class
+#' @param filename path to output file (optional). If \code{NULL}, standard raster handling will apply, i.e. storage either in memory or in the raster temp directory.
+#' @param maskRaster Raster layer containing a binary mask to exclude areas from prediction.
+#' @param verbose logical. prints progress, statistics and graphics during execution
+#' @param predict logical. \code{TRUE} (default) will return a classified map, \code{FALSE} will only train the classifier
+#' @param ... further arguments to be passed to randomForest
+#' @return A list containing [[1]] the model, [[2]] the predicted raster and [[3]] the class mapping  
+#' @seealso \code{\link{randomForest}} 
+#' @export
 superClass <- function(inputRaster, trainingData, classAttributes = NULL, nSamples = 100, filename = NULL, maskRaster = NULL, verbose = FALSE, predict = TRUE, overwrite = TRUE, ...) {
 	# TODO: point vector data
 	# TODO: enable regression mode
@@ -893,16 +918,16 @@ superClass <- function(inputRaster, trainingData, classAttributes = NULL, nSampl
 	# DISCUSS: demo data
 	
 	## Filetypes
-	if(!inherits(inputRaster, Raster)) stop("inputRaster must be a raster object (RasterLayer,RasterBrick or RasterStack)", call.=FALSE)
-	if(!inherits(trainingData, SpatialPolygonsDataFrame)) stop("traingData must be a SpatialPolygonsDataFrame", call.=FALSE)
+	if(!inherits(inputRaster, 'Raster')) stop(inputRaster must be a raster object (RasterLayer,RasterBrick or RasterStack), call.=FALSE)
+	if(!inherits(trainingData, 'SpatialPolygonsDataFrame')) stop(traingData must be a SpatialPolygonsDataFrame, call.=FALSE)
 	
 	## Attribute column
 	if(is.null(classAttributes)){
 		if(ncol(trainingData) == 1) {
 			classAttributes <- 1
-			message("You did not specify the classAttributes column. \nSince your trainingData only contains one column we assume this is it")
+			message(You did not specify the classAttributes column. \nSince your trainingData only contains one column we assume this is it)
 		} else {
-			stop(paste("Dontt know which column in trainingData contains the class attribute. \nPlease specify classAttributes as one of: , paste(colnames(trainingData@data),collapse=, )), call. = FALSE)
+			stop(paste(Dont't know which column in trainingData contains the class attribute. \nPlease specify classAttributes as one of: , paste(colnames(trainingData@data),collapse=, )), call. = FALSE)
 		}
 	} 
 	if(!classAttributes %in% colnames(trainingData@data)) 
@@ -978,7 +1003,7 @@ superClass <- function(inputRaster, trainingData, classAttributes = NULL, nSampl
 	 
 	## Print summary stats
 	if(verbose)
-		print(paste0(paste0(rep(*,20), collapse = "), Classification summary  ,paste0(rep(*,20), collapse = ")))
+		print(paste0(paste0(rep(*,20), collapse = ), Classification summary  ,paste0(rep(*,20), collapse = )))
 		## Samples total
 		## Samples per class
 		print(model)
@@ -988,6 +1013,4 @@ superClass <- function(inputRaster, trainingData, classAttributes = NULL, nSampl
 	return(list(model = model, map = spatPred, classMapping = classMapping)) 
 	
 }
-
-
-#+END_SRC
+  #+END_SRC

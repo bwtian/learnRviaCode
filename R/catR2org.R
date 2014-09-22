@@ -38,7 +38,7 @@ catR2org  <- function(pkgRepo, pkgWD){
                                     append = T,quote = F, row.names = F, col.names = F)
                 }
                 message("Wrap R code files to Emacs Org-mode babel file Finished")
-                for i in list.files(pattern = "*.org$") {
+                for (i in list.files(pattern = "*.org$")) {
                 file.copy(from = ".",  to = "./learnRviaCode/Org" )
                 }
 }

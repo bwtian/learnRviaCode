@@ -42,5 +42,4 @@ catR2org  <- function(pkgName, pkgDir, orgDir){
                 file.copy(from = i,  to = orgDir )
                 file.remove(i)
                 }
-
 }

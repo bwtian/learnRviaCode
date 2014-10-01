@@ -46,4 +46,17 @@
 | Setting        | rasterOptions |                    |             |        |       |             |
 |----------------+---------------+--------------------+-------------+--------+-------+-------------|
 * Raster options
+* rasterVis
+#+BEGIN_SRC dot :file ./rasterVis.png
+digraph {
+node [shape = box]
+rasterVis -> {lattice, ggplot2, ggmap} 
+lattice -> levelplot
+ggplot2 -> gplot
+ggmap -> gmap
+}
+#+END_SRC
+
+#+RESULTS[f0b87357399c41d5045d22d1723669dca5c4023a]:
+[[file:./rasterVis.png]]
 

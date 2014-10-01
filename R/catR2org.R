@@ -8,10 +8,10 @@
 #' @return A .org file - the product of a and b
 #' @author Bingwei Tian <bwtian@gmail.com>
 #' @example catR2org("landsat")
-catR2org  <- function(pkgRepo, pkgWD){
-                pkgWD     <- getwd()
-                pkgDir    <- file.path(pkgWD,pkgRepo)
-                des1      <- readLines(file.path(pkgDir,"DESCRIPTION"))
+catR2org  <- function(pkgName, pkgDir, orgDir){
+                pkgDir    <- getwd()
+                pkgPath    <- file.path(pkgDir,pkgName)
+                des1      <- readLines(file.path(pkgPath,"DESCRIPTION"))
                 des2      <- gsub(pattern  = "(^[^:]+):(.+$)",
                                   replacement  = "\\1%\\2", x = des1)
                 des3      <- paste0("+ ", des1)
@@ -39,7 +39,7 @@ catR2org  <- function(pkgRepo, pkgWD){
                 }
                 message("Wrap R code files to Emacs Org-mode babel file Finished")
                 for (i in list.files(pattern = "*.org$")) {
-                file.copy(from = i,  to = "./learnRviaCode/Org" )
+                file.copy(from = i,  to = "~/SparkleShare/learnRviaCode/Org" )
                 file.remove(i)
                 }
 

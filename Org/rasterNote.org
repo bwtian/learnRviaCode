@@ -48,19 +48,77 @@
 * Raster options
 * rasterVis
 #+NAME: rasterVis
-#+BEGIN_SRC dot :file ./rasterVis.png
-digraph {
-node [shape = box]
-rasterVis -> {lattice, ggplot2, ggmap, rgl} 
-lattice -> levelplot
-ggplot2 -> gplot
-ggmap -> gmap
-rgl -> plot3D
-}
+#+BEGIN_SRC dot :file ./Figs/rasterVis.png
+              digraph {
+                      rankdir = LR;
+                      // "Plot of Raster"
+                      node [shape = box];
+                      //rasterVis -> {Classes, Methods, Functions, Themes} 
+                      // Classes
+                      // Methods
+                      Methods [label = "Methods \n Functions"];
+                      Methods -> {levelplot, densityplot, contourplot,xyplot, bwplot, 
+                              histogram, hexbinplot, Formula, identifyRaster, xyLayer,
+                              gplot,plot3D,horizonplot, 
+                              hovmoller, splom, vectorplot};
+                      // Functions
+                      {contourplot, levelplot, densityplot, bwplot, 
+                              histogram, xyplot, bwplot, splom} -> lattice;
+                      {horizonplot} -> latticeExtra;
+                      gplot -> ggplot2;
+                      plot3D -> rgl;
+                      // Themes DONE
+                      lattice -> {BTCTheme, BuRdTheme, GrTheme, PuOrTheme, 
+                              rasterTheme, RdBuTheme, streamTheme, "xscale.raster", 
+                              "xscale.raster.subticks", "yscale.raster",
+                              "yscale.raster.subticks"} -> Themes [dir=back];
+              }
 #+END_SRC
 
-#+RESULTS[8282db4431122be23cd9d74a8975f6fa7adedc13]: rasterVis
-[[file:./rasterVis.png]]
+#+RESULTS[5044d976d597bc2f00a6d2de1d3531aca6a084df]: rasterVis
+[[file:./Figs/rasterVis.png]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

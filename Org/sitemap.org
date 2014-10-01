@@ -1,4 +1,6 @@
 #+TITLE: Sitemap
 
    + [[file:RStoolbox_0.01_(2014-5-6_by_).org][RStoolbox_0.01_(2014-5-6_by_)]]
+   + [[file:rasterNote.org][rasterNote]]
+   + raster_2.3-0_(2014-9-5_by_Robert-J.-Hijmans-[[file:raster_2.3-0_(2014-9-5_by_Robert-J.-Hijmans-[cre,-aut],).org][cre,-aut]],)
    + [[file:teamlucc_0.38_(2014-08-24_by_).org][teamlucc_0.38_(2014-08-24_by_)]]

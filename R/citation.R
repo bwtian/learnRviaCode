@@ -1,9 +1,11 @@
 #' Write R and R packages citation in Latex
 #'
-#citation()
+#' @author Bingwei Tian <bwtian@gmail.com>
+
 library("knitr")
 pkgs  <- c( "raster", "sp", "rgeos", "rgdal", "gdalUtils", "landsat",  "gstat", "maptools", "ggplot2", "ggmap", "plotKML", "rasterVis",  "lattice")
-# write_bib(pkgs)
+#citation()
+write_bib(pkgs)
 # write_bib(pkg2, file = "Rpkg2.bib")
 cites  <- list()
 for (i in pkgs) {

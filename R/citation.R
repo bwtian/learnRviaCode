@@ -1,4 +1,4 @@
-#' Write R and R packages citation in Latex
+#' Write R and R packages citation in a Latex paragraph
 #'
 #' @author Bingwei Tian <bwtian@gmail.com>
 #' @import knitr
@@ -14,3 +14,6 @@ for (i in pkgs) {
 }
 cat(unlist(cites))
 # raster \cite{R-raster}, sp \cite{R-sp}, rgeos \cite{R-rgeos}, rgdal \cite{R-rgdal}, gdalUtils \cite{R-gdalUtils}, landsat \cite{R-landsat}, gstat \cite{R-gstat}, maptools \cite{R-maptools}, ggplot2 \cite{R-ggplot2}, ggmap \cite{R-ggmap}, plotKML \cite{R-plotKML}, rasterVis \cite{R-rasterVis}, lattice \cite{R-lattice},
+
+
+tolower("PRELIMINARY STUDY ON THE EFFECTS OF SOIL THERMAL ANOMALY ON LAND SURFACE ENERGY BUDGET")

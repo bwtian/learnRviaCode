@@ -1,6 +1,7 @@
 #' Write R and R packages citation in Latex
 #'
 #' @author Bingwei Tian <bwtian@gmail.com>
+#' @import knitr
 
 library("knitr")
 pkgs  <- c( "raster", "sp", "rgeos", "rgdal", "gdalUtils", "landsat",  "gstat", "maptools", "ggplot2", "ggmap", "plotKML", "rasterVis",  "lattice")

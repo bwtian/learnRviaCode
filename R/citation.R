@@ -1,3 +1,5 @@
+#' Write R and R packages citation in Latex
+#'
 #citation()
 library("knitr")
 pkgs  <- c( "raster", "sp", "rgeos", "rgdal", "gdalUtils", "landsat",  "gstat", "maptools", "ggplot2", "ggmap", "plotKML", "rasterVis",  "lattice")

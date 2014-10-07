@@ -1,6 +1,7 @@
 #' Cat R files in the folder to Org file links
 #' @export
 #' @usage  catR2orgLink()
+#' @author Bingwei Tian <bwtian@gmail.com>
 catR2orgLink  <- function(dir = getwd(), full.path = FALSE) {
         ## todo path = absolute or not
 rFiles <- list.files(path = dir, pattern = "[rR]$", full.name = T)

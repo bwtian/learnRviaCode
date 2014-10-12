@@ -12,7 +12,8 @@ catR2R  <- function(dir = getwd(), type = "R"){
                 title  <- paste("#'", basename(i))
                 content <- readLines(i)
                 if (type == "R"){
-                        write.table(c(title,content), fileName, append = TRUE, quote = FALSE,col.names = FALSE,row.names = FALSE)
+                 write.table(c(title,content), fileName, append = TRUE,
+                             quote = FALSE,col.names = FALSE,row.names = FALSE)
                 }
 
         }

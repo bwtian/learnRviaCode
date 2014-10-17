@@ -30,10 +30,10 @@ catRpkg2org  <- function(pkgName, pkgDir){
                 rPath  <- file.path(pkgDir, "/R")
                 rFiles <- list.files(path   = rPath, pattern = "[rR]$")
                 for (i in c(rFiles)){
-                        heading <- paste0("* ", i)
-                        header  <- " #+BEGIN_SRC R "
+                        heading <- paste0("** ", i)
+                        header  <- "#+BEGIN_SRC R "
                         rfile   <- read.table(file = file.path(rPath,i), sep = "\n", quote = "\"", comment.char = "")
-                        ender   <- "  #+END_SRC"
+                        ender   <- "#+END_SRC"
                         write.table(rbind(heading, header,rfile, ender), orgName, sep = "\n",
                                     append = T,quote = F, row.names = F, col.names = F)
                 }

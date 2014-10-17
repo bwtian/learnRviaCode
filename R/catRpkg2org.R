@@ -38,8 +38,8 @@ catR2org  <- function(pkgName, pkgDir, orgDir){
                                     append = T,quote = F, row.names = F, col.names = F)
                 }
                 message("Wrap R code files to Emacs Org-mode babel file Finished")
-                for (i in list.files(pattern = "*.org$")) {
-                file.copy(from = i,  to = orgDir )
-                file.remove(i)
+#                 for (i in list.files(pattern = "*.org$")) {
+#                 file.copy(from = i,  to = orgDir )
+#                 file.remove(i)
                 }
 }

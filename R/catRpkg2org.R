@@ -26,22 +26,22 @@ catRpkg2org  <- function(pkgName, pkgDir){
                 pkgMaintainer <- des[des[,1] == "Maintainer",][,2]
                 pkgMaintainer <- gsub("(^ *)|( *$)", "", pkgMaintainer)
                 pkgMaintainer <- gsub("\\s", "-", pkgMaintainer)
-                #orgName   <- paste0(pkgName, "_", pkgVer, "_(", pkgDate, "_by_",pkgMaintainer,").org")
+                #orgName   <- paste0(pkgName, "_", pkgVer, "_(", pkgDate,
+                #"_by_",pkgMaintainer,").org")
                 orgName   <- paste0(pkgName, "_", pkgVer, "_", pkgDate, ".org")
-                write.table(des3, orgName, sep = ":",  append = T,quote = F, row.names = F, col.names = F)
+                write.table(des3, orgName, sep = ":",  append = T,quote = F,
+                            row.names = F, col.names = F)
                 rPath  <- file.path(pkgDir, "/R")
-                rFiles <- list.files(path   = rPath, pattern = "[rR]$")
+                rFiles <- list.files(path   = rPath, pattern = "*.[rR]$")
                 for (i in c(rFiles)){
                         heading <- paste0("** ", i)
                         header  <- "#+BEGIN_SRC R "
-                        rfile   <- read.table(file = file.path(rPath,i), sep = "\n", quote = "\"", comment.char = "")
+                        rfile   <- read.table(file = file.path(rPath,i),
+                                              sep = "\n", quote = "\"",
+                                              comment.char = "")
                         ender   <- "#+END_SRC"
-                        write.table(rbind(heading, header,rfile, ender), orgName, sep = "\n",
-                                    append = T,quote = F, row.names = F, col.names = F)
+                        write.table(rbind(heading, header,rfile, ender),
+                                    orgName, sep = "\n", append = T,quote = F,
+                                    row.names = F, col.names = F)
                 }
-#                message("Wrap R code files to Emacs Org-mode babel file Finished")
-#                 for (i in list.files(pattern = "*.org$")) {
-#                 file.copy(from = i,  to = orgDir )
-#                 file.remove(i)
-#                 }
 }

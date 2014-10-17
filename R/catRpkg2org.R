@@ -29,7 +29,7 @@ catRpkg2org  <- function(pkgName, pkgDir){
                 #orgName   <- paste0(pkgName, "_", pkgVer, "_(", pkgDate,
                 #"_by_",pkgMaintainer,").org")
                 orgName   <- paste0(pkgName, "_", pkgVer, "_", pkgDate, ".org")
-                write.table(des3, orgName, sep = ":",  append = T,quote = F,
+                write.table(des3, orgName, sep = ":", append = T,quote = F,
                             row.names = F, col.names = F)
                 rPath  <- file.path(pkgDir, "/R")
                 rFiles <- list.files(path   = rPath, pattern = "*.[rR]$")

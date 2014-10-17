@@ -8,7 +8,7 @@
 #' @return A .org file - the product of a and b
 #' @author Bingwei Tian <bwtian@gmail.com>
 #' @example catR2org("landsat")
-catRpkg2org  <- function(pkgName, pkgDir, orgDir){
+catRpkg2org  <- function(pkgName, pkgDir){
                 pkgDir    <- getwd()
                 pkgPath    <- file.path(pkgDir,pkgName)
                 des1      <- readLines(file.path(pkgPath,"DESCRIPTION"))

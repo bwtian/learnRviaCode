@@ -22,6 +22,7 @@ catRpkg2org  <- function(pkgName, pkgDir){
                 pkgName   <- gsub("(^ *)|( *$)", "", pkgName)
                 pkgDate   <- des[des[,1] == "Date",][,2]
                 pkgDate   <- gsub("(^ *)|( *$)", "", pkgDate)
+                pkgDate  <-  as.Date(pkgDate)
                 pkgMaintainer <- des[des[,1] == "Maintainer",][,2]
                 pkgMaintainer <- gsub("(^ *)|( *$)", "", pkgMaintainer)
                 pkgMaintainer <- gsub("\\s", "-", pkgMaintainer)

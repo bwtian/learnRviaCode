@@ -11,6 +11,7 @@ for (i in c(rFiles)) {
         name  <- tools::file_path_sans_ext(basename(i))
         header1  <- paste0("** ",name, ": file:", tools::file_path_as_absolute(i))
         header  <- gsub("\\/home\\/.+\\/SparkleShare","~\\/SparkleShare", header1)
+
         write.table(header,
                     append = T,quote = F, row.names = F, col.names = F)
 }

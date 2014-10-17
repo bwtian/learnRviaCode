@@ -41,5 +41,5 @@ catRpkg2org  <- function(pkgName, pkgDir, orgDir){
 #                 for (i in list.files(pattern = "*.org$")) {
 #                 file.copy(from = i,  to = orgDir )
 #                 file.remove(i)
-                }
+#                 }
 }

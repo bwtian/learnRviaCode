@@ -8,13 +8,14 @@
 #' @return A .org file - the product of a and b
 #' @author Bingwei Tian <bwtian@gmail.com>
 #' @example catR2org("landsat")
+#'
 catRpkg2org  <- function(pkgName, pkgDir){
                 pkgDir    <- getwd()
                 pkgPath    <- file.path(pkgDir,pkgName)
                 des1      <- readLines(file.path(pkgPath,"DESCRIPTION"))
                 des2      <- gsub(pattern  = "(^[^:]+):(.+$)",
                                   replacement  = "\\1%\\2", x = des1)
-                des3      <- paste0("+ ", des1)
+                desInfo      <- paste0("+ ", des1)
                 des       <- as.data.frame(do.call(rbind,strsplit(des2, split = "%")))
                 pkgVer    <- des[des[,1] == "Version",][,2]
                 pkgVer    <- gsub("(^ *)|( *$)", "", pkgVer)
@@ -29,8 +30,8 @@ catRpkg2org  <- function(pkgName, pkgDir){
                 #orgName   <- paste0(pkgName, "_", pkgVer, "_(", pkgDate,
                 #"_by_",pkgMaintainer,").org")
                 orgName   <- paste0(pkgName, "_", pkgVer, "_", pkgDate, ".org")
-                write.table(des3, orgName, sep = ":", append = T,quote = F,
-                            row.names = F, col.names = F)
+#                 write.table(desInfo, orgName, sep = ":", quote = F,
+#                             row.names = F, col.names = F)
                 rPath  <- file.path(pkgDir, "/R")
                 rFiles <- list.files(path   = rPath, pattern = "*.[rR]$")
                 for (i in c(rFiles)){

@@ -30,10 +30,10 @@ catRpkg2org  <- function(pkgName, pkgDir){
                 #orgName   <- paste0(pkgName, "_", pkgVer, "_(", pkgDate,
                 #"_by_",pkgMaintainer,").org")
                 orgName   <- paste0(pkgName, "_", pkgVer, "_", pkgDate, ".org")
-#                 write.table(desInfo, orgName, sep = ":", quote = F,
-#                             row.names = F, col.names = F)
+                write.table(desInfo, orgName, sep = ":", quote = F,
+                            row.names = F, col.names = F)
                 rPath  <- file.path(pkgDir, "/R")
-                rFiles <- list.files(path   = rPath, pattern = "*.[rR]$")
+                rFiles <- dir(path = rPath, pattern = "*")
                 for (i in c(rFiles)){
                         heading <- paste0("** ", i)
                         header  <- "#+BEGIN_SRC R "

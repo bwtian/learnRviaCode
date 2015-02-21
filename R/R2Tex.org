@@ -16,7 +16,7 @@ R [label = "R"]
 //2. set path
 R -> knitr -> Rmd -> PDF
 R -> Latex -> listing
-
+Latex ->
 //3. set rank
 }
 #+END_SRC

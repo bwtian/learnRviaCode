@@ -15,7 +15,7 @@ node [shape = box]
 R [label = "R"]
 
 //2. set path
-
+R
 
 //3. set rank
 {rank = same; A, B}

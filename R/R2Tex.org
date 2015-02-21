@@ -17,6 +17,7 @@ R [label = "R"]
 R -> knitr -> Rmd -> PDF
 knitr -> Rnw -> PDF
 R -> Sweave -> Rnw
+R -> Org ->
 R -> Latex -> listings -> lstset
 Latex -> verbatim
 //3. set rank

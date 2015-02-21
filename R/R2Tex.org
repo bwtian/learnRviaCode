@@ -19,10 +19,9 @@ R -> knitr -> Rmd -> PDF
 R -> Latex -> listing
 
 //3. set rank
-
 }
 #+END_SRC
 #+CAPTION: Table/figure name Out put of above code
 #+NAME: fig:r2tex
-#+RESULTS[a46cc5f7485aadf6edb2fb69ea50e881a9c622a4]: dot:r2tex
+#+RESULTS[790d86e619ec3aeeda766b2179fc390cc5109ea8]: dot:r2tex
 [[file:./r2tex.svg]]

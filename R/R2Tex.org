@@ -9,7 +9,6 @@ fontsize = 12;
 splines = false;
 ranksep = 0.5;
 nodesep = 0.5;
-edge[constraint=false];
 node [shape = box]
 //1. set node
 R [label = "R"]
@@ -23,5 +22,5 @@ R -> Latex -> listing
 #+END_SRC
 #+CAPTION: Table/figure name Out put of above code
 #+NAME: fig:r2tex
-#+RESULTS[790d86e619ec3aeeda766b2179fc390cc5109ea8]: dot:r2tex
+#+RESULTS[704024d76428dc0cf709d5fa9953fafb8229391b]: dot:r2tex
 [[file:./r2tex.svg]]

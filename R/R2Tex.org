@@ -1,0 +1,25 @@
+#+NAME: dot:r2tex
+#+HEADER: :cache yes :tangle yes :exports none
+#+HEADER: :results output graphics
+#+BEGIN_SRC dot :file ./r2tex.svg
+digraph {
+rankdir=LR;
+fontname="Times";
+fontsize = 12;
+splines = false;
+ranksep = 0.5;
+nodesep = 0.5;
+edge[constraint=false];
+node [shape = box]
+//1. set node
+
+//2. set path
+
+A -> B
+//3. set rank
+{rank = same; A, B}
+}
+#+END_SRC
+#+CAPTION: Table/figure name Out put of above code
+#+NAME: fig:r2tex
+#+RESULTS: dot:r2tex

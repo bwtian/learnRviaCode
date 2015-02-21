@@ -16,6 +16,7 @@ R [label = "R"]
 //2. set path
 R -> knitr -> Rmd -> PDF
 knitr -> Rnw -> PDF
+R -> Sweave -> Rnw
 R -> Latex -> listings -> lstset
 Latex -> verbatim
 //3. set rank
@@ -23,5 +24,5 @@ Latex -> verbatim
 #+END_SRC
 #+CAPTION: Table/figure name Out put of above code
 #+NAME: fig:r2tex
-#+RESULTS[5adb5acfc839f64753d28ce694937b5a5679c6e4]: dot:r2tex
+#+RESULTS[446e714d7b210d23c2427d2d613ca05ff8499b7e]: dot:r2tex
 [[file:./r2tex.svg]]

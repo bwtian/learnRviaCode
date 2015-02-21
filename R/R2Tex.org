@@ -12,14 +12,16 @@ nodesep = 0.5;
 edge[constraint=false];
 node [shape = box]
 //1. set node
+R [label = "R"]
 
 //2. set path
 
-A -> B
+
 //3. set rank
 {rank = same; A, B}
 }
 #+END_SRC
 #+CAPTION: Table/figure name Out put of above code
 #+NAME: fig:r2tex
-#+RESULTS: dot:r2tex
+#+RESULTS[fae7b49756e24ea89088569cc77c66723beef5f2]: dot:r2tex
+[[file:./r2tex.svg]]

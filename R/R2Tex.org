@@ -27,3 +27,5 @@ Latex -> verbatim
 #+NAME: fig:r2tex
 #+RESULTS[23f0b37d932ba5cccd15a539ed9ce04002ff40da]: dot:r2tex
 [[file:./r2tex.svg]]
+
+*
